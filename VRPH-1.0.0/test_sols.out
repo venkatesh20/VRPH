@@ -1,0 +1,1547 @@
+--------------------------------------------
+VRPH, version 1.0
+Copyright 2010 Chris Groer
+Distributed under Common Public License 1.0
+--------------------------------------------
+
+CW solution 0[L=0.6000]: 582.7002
+Uphill starting at 582.70
+Uphill complete	(6,557.78,557.78)
+# of recorded routes: 6[6]
+New best found in uphill!
+Downhill starting at 557.782467 (best=538.470461)
+Downhill starting at 545.285519 (best=538.470461)
+Downhill complete: 545.29[downhill started at 545.285519] (538.47)
+Uphill starting at 545.29
+Uphill complete	(6,550.08,545.29)
+# of recorded routes: 6[6]
+Downhill starting at 550.075306 (best=538.470461)
+Downhill starting at 545.477164 (best=538.470461)
+Downhill complete: 545.48[downhill started at 545.477164] (538.47)
+Uphill starting at 545.48
+Uphill complete	(6,550.50,545.29)
+# of recorded routes: 6[6]
+Downhill starting at 550.498947 (best=538.470461)
+Downhill starting at 545.477164 (best=538.470461)
+Downhill complete: 545.48[downhill started at 545.477164] (538.47)
+Uphill starting at 545.48
+Uphill complete	(6,550.30,545.29)
+# of recorded routes: 6[6]
+New best found in uphill!
+Downhill starting at 550.295583 (best=529.233849)
+Downhill starting at 541.965486 (best=529.233849)
+Downhill complete: 541.97[downhill started at 541.965486] (529.23)
+Uphill starting at 541.97
+Uphill complete	(6,545.05,541.97)
+# of recorded routes: 6[6]
+Downhill starting at 545.047834 (best=529.233849)
+Downhill starting at 541.965486 (best=529.233849)
+Downhill complete: 541.97[downhill started at 541.965486] (529.23)
+Uphill starting at 541.97
+Uphill complete	(6,545.05,541.97)
+# of recorded routes: 6[6]
+Downhill starting at 545.047834 (best=529.233849)
+Downhill starting at 541.965486 (best=529.233849)
+Downhill complete: 541.97[downhill started at 541.965486] (529.23)
+Uphill starting at 541.97
+Uphill complete	(6,545.05,541.97)
+# of recorded routes: 6[6]
+Downhill starting at 545.047834 (best=529.233849)
+Downhill starting at 541.965486 (best=529.233849)
+Downhill complete: 541.97[downhill started at 541.965486] (529.23)
+Uphill starting at 541.97
+Uphill complete	(6,545.05,541.97)
+# of recorded routes: 6[6]
+Downhill starting at 545.047834 (best=529.233849)
+Downhill starting at 541.965486 (best=529.233849)
+Downhill complete: 541.97[downhill started at 541.965486] (529.23)
+perturbing
+Uphill starting at 573.46
+Uphill complete	(6,561.25,561.25)
+# of recorded routes: 6[6]
+Downhill starting at 561.247495 (best=529.233849)
+Downhill starting at 536.038456 (best=529.233849)
+Downhill complete: 536.04[downhill started at 536.038456] (529.23)
+Uphill starting at 536.04
+Uphill complete	(6,541.04,536.04)
+# of recorded routes: 6[6]
+Downhill starting at 541.037718 (best=529.233849)
+Downhill starting at 536.038456 (best=529.233849)
+Downhill complete: 536.04[downhill started at 536.038456] (529.23)
+Uphill starting at 536.04
+Uphill complete	(6,541.04,536.04)
+# of recorded routes: 6[6]
+Downhill starting at 541.037718 (best=529.233849)
+Downhill starting at 536.038456 (best=529.233849)
+Downhill complete: 536.04[downhill started at 536.038456] (529.23)
+Uphill starting at 536.04
+Uphill complete	(6,541.04,536.04)
+# of recorded routes: 6[6]
+Downhill starting at 541.037718 (best=529.233849)
+Downhill starting at 536.038456 (best=529.233849)
+Downhill complete: 536.04[downhill started at 536.038456] (529.23)
+Uphill starting at 536.04
+Uphill complete	(6,541.04,536.04)
+# of recorded routes: 6[6]
+Downhill starting at 541.037718 (best=529.233849)
+Downhill starting at 536.038456 (best=529.233849)
+Downhill complete: 536.04[downhill started at 536.038456] (529.23)
+BEST OBJ:  529.233849
+529.23
+CW solution 1[L=1.4000]: 596.4201
+Uphill starting at 596.42
+Uphill complete	(7,586.79,586.79)
+# of recorded routes: 7[7]
+New best found in uphill!
+Downhill starting at 586.790209 (best=554.967055)
+Downhill starting at 549.305071 (best=549.305071)
+Downhill complete: 549.31[downhill started at 549.305071] (549.31)
+Uphill starting at 549.31
+Uphill complete	(7,552.96,549.31)
+# of recorded routes: 7[7]
+New best found in uphill!
+Downhill starting at 552.955461 (best=548.350162)
+Downhill starting at 547.402138 (best=547.402138)
+Downhill starting at 545.557858 (best=545.557858)
+Downhill complete: 545.56[downhill started at 545.557858] (545.56)
+Uphill starting at 545.56
+Uphill complete	(7,550.89,545.56)
+# of recorded routes: 7[7]
+Downhill starting at 550.894738 (best=545.557858)
+Downhill starting at 549.305071 (best=545.557858)
+Downhill complete: 549.31[downhill started at 549.305071] (545.56)
+Uphill starting at 549.31
+Uphill complete	(7,550.75,545.56)
+# of recorded routes: 7[7]
+Downhill starting at 550.752172 (best=545.557858)
+Downhill starting at 549.305071 (best=545.557858)
+Downhill complete: 549.31[downhill started at 549.305071] (545.56)
+Uphill starting at 549.31
+Uphill complete	(7,550.75,545.56)
+# of recorded routes: 7[7]
+Downhill starting at 550.752172 (best=545.557858)
+Downhill starting at 549.305071 (best=545.557858)
+Downhill complete: 549.31[downhill started at 549.305071] (545.56)
+Uphill starting at 549.31
+Uphill complete	(7,550.75,545.56)
+# of recorded routes: 7[7]
+Downhill starting at 550.752172 (best=545.557858)
+Downhill starting at 549.305071 (best=545.557858)
+Downhill complete: 549.31[downhill started at 549.305071] (545.56)
+perturbing
+Uphill starting at 578.53
+Uphill complete	(6,566.15,566.15)
+# of recorded routes: 6[6]
+Downhill starting at 566.152808 (best=545.557858)
+Downhill starting at 538.494527 (best=538.494527)
+Downhill complete: 538.49[downhill started at 538.494527] (538.49)
+Uphill starting at 538.49
+Uphill complete	(6,542.72,538.49)
+# of recorded routes: 6[6]
+Downhill starting at 542.715961 (best=538.494527)
+Downhill starting at 538.494527 (best=538.494527)
+Downhill complete: 538.49[downhill started at 538.494527] (538.49)
+Uphill starting at 538.49
+Uphill complete	(6,542.72,538.49)
+# of recorded routes: 6[6]
+Downhill starting at 542.715961 (best=538.494527)
+Downhill starting at 538.494527 (best=538.494527)
+Downhill complete: 538.49[downhill started at 538.494527] (538.49)
+Uphill starting at 538.49
+Uphill complete	(6,542.72,538.49)
+# of recorded routes: 6[6]
+Downhill starting at 542.715961 (best=538.494527)
+Downhill starting at 538.494527 (best=538.494527)
+Downhill complete: 538.49[downhill started at 538.494527] (538.49)
+Uphill starting at 538.49
+Uphill complete	(6,542.72,538.49)
+# of recorded routes: 6[6]
+Downhill starting at 542.715961 (best=538.494527)
+Downhill starting at 538.494527 (best=538.494527)
+Downhill complete: 538.49[downhill started at 538.494527] (538.49)
+BEST OBJ:  538.494527
+538.49
+CW solution 2[L=1.6000]: 686.0836
+Uphill starting at 686.08
+Uphill complete	(8,624.19,624.19)
+# of recorded routes: 8[8]
+New best found in uphill!
+Downhill starting at 624.186807 (best=585.743312)
+Downhill starting at 578.064420 (best=578.064420)
+Downhill starting at 573.972139 (best=573.972139)
+Downhill complete: 573.97[downhill started at 573.972139] (573.97)
+Uphill starting at 573.97
+Uphill complete	(8,575.90,573.97)
+# of recorded routes: 8[8]
+Downhill starting at 575.901521 (best=573.972139)
+Downhill starting at 573.972139 (best=573.972139)
+Downhill complete: 573.97[downhill started at 573.972139] (573.97)
+Uphill starting at 573.97
+Uphill complete	(8,575.90,573.97)
+# of recorded routes: 8[8]
+Downhill starting at 575.901521 (best=573.972139)
+Downhill starting at 573.972139 (best=573.972139)
+Downhill complete: 573.97[downhill started at 573.972139] (573.97)
+Uphill starting at 573.97
+Uphill complete	(8,575.90,573.97)
+# of recorded routes: 8[8]
+Downhill starting at 575.901521 (best=573.972139)
+Downhill starting at 573.972139 (best=573.972139)
+Downhill complete: 573.97[downhill started at 573.972139] (573.97)
+Uphill starting at 573.97
+Uphill complete	(8,575.90,573.97)
+# of recorded routes: 8[8]
+Downhill starting at 575.901521 (best=573.972139)
+Downhill starting at 573.972139 (best=573.972139)
+Downhill complete: 573.97[downhill started at 573.972139] (573.97)
+perturbing
+Uphill starting at 558.38
+Uphill complete	(5,559.00,558.38)
+# of recorded routes: 5[5]
+New best found in uphill!
+Downhill starting at 559.004944 (best=543.542936)
+Downhill starting at 543.831777 (best=543.542936)
+Downhill complete: 543.83[downhill started at 543.831777] (543.54)
+Uphill starting at 543.83
+Uphill complete	(5,548.20,543.83)
+# of recorded routes: 5[5]
+Downhill starting at 548.198426 (best=543.542936)
+Downhill starting at 543.831777 (best=543.542936)
+Downhill complete: 543.83[downhill started at 543.831777] (543.54)
+Uphill starting at 543.83
+Uphill complete	(5,548.20,543.83)
+# of recorded routes: 5[5]
+Downhill starting at 548.198426 (best=543.542936)
+Downhill starting at 543.831777 (best=543.542936)
+Downhill complete: 543.83[downhill started at 543.831777] (543.54)
+Uphill starting at 543.83
+Uphill complete	(5,548.20,543.83)
+# of recorded routes: 5[5]
+Downhill starting at 548.198426 (best=543.542936)
+Downhill starting at 543.831777 (best=543.542936)
+Downhill complete: 543.83[downhill started at 543.831777] (543.54)
+Uphill starting at 543.83
+Uphill complete	(5,548.20,543.83)
+# of recorded routes: 5[5]
+Downhill starting at 548.198426 (best=543.542936)
+Downhill starting at 543.831777 (best=543.542936)
+Downhill complete: 543.83[downhill started at 543.831777] (543.54)
+BEST OBJ:  543.542936
+543.54
+
+------------------------------------------------
+Solution for problem Christofides-1
+Total route length:       529.23
+Best known solution:      524.61
+Total service time:        0.00
+Vehicle max route length: N/A
+Vehicle capacity:         160
+Number of nodes visited:  50
+------------------------------------------------
+
+Route 001[0-002...011-0	len=100.62	load=0159	#=010]
+Route 002[0-005...012-0	len=104.01	load=0158	#=011]
+Route 003[0-006...027-0	len=98.45	load=0152	#=009]
+Route 004[0-008...032-0	len=118.52	load=0149	#=011]
+Route 005[0-018...047-0	len=103.15	load=0154	#=008]
+Route 006[0-046...046-0	len=4.47	load=0005	#=001]
+
+-----------------------------------------------
+Total route length:  529.23
+
+Route 0001(routenum=1)[0-3...12-0, 100.62, 159, 10]: 
+0-3-30-22-17-51-35-31-10-39-12-0
+
+Route 0002(routenum=2)[0-6...13-0, 104.01, 158, 11]: 
+0-6-50-11-40-34-46-16-45-38-18-13-0
+
+Route 0003(routenum=3)[0-7...28-0, 98.45, 152, 9]: 
+0-7-15-26-25-44-8-24-49-28-0
+
+Route 0004(routenum=4)[0-9...33-0, 118.52, 149, 11]: 
+0-9-27-32-29-4-37-36-21-23-2-33-0
+
+Route 0005(routenum=5)[0-19...48-0, 103.15, 154, 8]: 
+0-19-14-42-41-20-43-5-48-0
+
+Route 0006(routenum=6)[0-47...47-0, 4.47, 5, 1]: 
+0-47-0
+End of routes.  Totals: (6 routes,50 nodes,777 total load)
+-----------------------------------------------
+                       (Moves,      Evaluations)
+     One Point Move:   (0000009943, 0001962497)
+     Two Point Move:   (0000001454, 0001588115)
+   Three Point Move:   (0000000000, 0000000000)
+       Two-opt Move:   (0000017831, 0008528250)
+     Three-opt Move:   (0000000000, 0000000000)
+        Or-opt Move:   (0000000000, 0000000000)
+Cross-Exchange Move:   (0000000000, 0000000000)
+
+
+6 529.234  4.04 1.009
+--------------------------------------------
+VRPH, version 1.0
+Copyright 2010 Chris Groer
+Distributed under Common Public License 1.0
+--------------------------------------------
+
+CW[0.600000] solution: 582.700211
+
+ctr=0 of 200, temp=2.000000, obj=582.700211 (overall best=582.700211; worst=0.000000)
+
+ctr=1 of 200, temp=1.980000, obj=598.228070 (overall best=579.692533; worst=633.390851)
+
+ctr=2 of 200, temp=1.960200, obj=587.706148 (overall best=575.575563; worst=641.102915)
+
+ctr=3 of 200, temp=1.940598, obj=571.820962 (overall best=562.263461; worst=627.791619)
+
+ctr=4 of 200, temp=1.921192, obj=569.340982 (overall best=551.698841; worst=580.433638)
+
+ctr=5 of 200, temp=1.901980, obj=586.111104 (overall best=551.698841; worst=596.035080)
+
+ctr=6 of 200, temp=1.882960, obj=600.431857 (overall best=551.698841; worst=611.486032)
+
+ctr=7 of 200, temp=1.864131, obj=560.791642 (overall best=542.837937; worst=602.057160)
+
+ctr=8 of 200, temp=1.845489, obj=573.750753 (overall best=542.837937; worst=588.968810)
+
+ctr=9 of 200, temp=1.827034, obj=565.745868 (overall best=542.837937; worst=607.503566)
+
+ctr=10 of 200, temp=1.808764, obj=557.157750 (overall best=541.936559; worst=584.036380)
+
+ctr=11 of 200, temp=1.790677, obj=566.575570 (overall best=541.936559; worst=593.944676)
+
+ctr=12 of 200, temp=1.772770, obj=574.957182 (overall best=541.936559; worst=599.219752)
+
+ctr=13 of 200, temp=1.755042, obj=580.672271 (overall best=541.936559; worst=583.892565)
+
+ctr=14 of 200, temp=1.737492, obj=570.445865 (overall best=541.936559; worst=585.489090)
+
+ctr=15 of 200, temp=1.720117, obj=567.224646 (overall best=541.936559; worst=593.739611)
+
+ctr=16 of 200, temp=1.702916, obj=556.196034 (overall best=541.936559; worst=573.521035)
+
+ctr=17 of 200, temp=1.685886, obj=558.954732 (overall best=541.936559; worst=593.043316)
+
+ctr=18 of 200, temp=1.669028, obj=561.103908 (overall best=541.936559; worst=583.363766)
+
+ctr=19 of 200, temp=1.652337, obj=584.975124 (overall best=541.936559; worst=589.387779)
+
+ctr=20 of 200, temp=1.635814, obj=569.890404 (overall best=541.936559; worst=593.051855)
+
+ctr=21 of 200, temp=1.619456, obj=567.442426 (overall best=541.936559; worst=577.679551)
+
+ctr=22 of 200, temp=1.603261, obj=556.021870 (overall best=541.936559; worst=586.760353)
+
+ctr=23 of 200, temp=1.587229, obj=557.758198 (overall best=541.936559; worst=589.762503)
+
+ctr=24 of 200, temp=1.571356, obj=566.686416 (overall best=541.936559; worst=581.180802)
+
+ctr=25 of 200, temp=1.555643, obj=562.355174 (overall best=541.936559; worst=570.047369)
+
+ctr=26 of 200, temp=1.540086, obj=560.925153 (overall best=541.936559; worst=573.585850)
+
+ctr=27 of 200, temp=1.524685, obj=563.882583 (overall best=541.936559; worst=570.744737)
+
+ctr=28 of 200, temp=1.509439, obj=553.972344 (overall best=541.936559; worst=581.888091)
+
+ctr=29 of 200, temp=1.494344, obj=558.339146 (overall best=541.936559; worst=570.695795)
+
+ctr=30 of 200, temp=1.479401, obj=566.419936 (overall best=541.936559; worst=572.794891)
+
+ctr=31 of 200, temp=1.464607, obj=562.912976 (overall best=541.936559; worst=585.571703)
+
+ctr=32 of 200, temp=1.449961, obj=569.451928 (overall best=541.936559; worst=578.488033)
+
+ctr=33 of 200, temp=1.435461, obj=568.570392 (overall best=541.936559; worst=597.556893)
+
+ctr=34 of 200, temp=1.421106, obj=562.342534 (overall best=541.936559; worst=579.201460)
+
+ctr=35 of 200, temp=1.406895, obj=566.014369 (overall best=541.936559; worst=570.494460)
+
+ctr=36 of 200, temp=1.392826, obj=580.618351 (overall best=541.936559; worst=580.618351)
+
+ctr=37 of 200, temp=1.378898, obj=551.564528 (overall best=541.936559; worst=586.486131)
+
+ctr=38 of 200, temp=1.365109, obj=561.392201 (overall best=541.936559; worst=565.373528)
+
+ctr=39 of 200, temp=1.351458, obj=556.216029 (overall best=537.758719; worst=563.596240)
+
+ctr=40 of 200, temp=1.337944, obj=541.732639 (overall best=536.107270; worst=564.764118)
+
+ctr=41 of 200, temp=1.324564, obj=538.735427 (overall best=536.107270; worst=560.856874)
+
+ctr=42 of 200, temp=1.311318, obj=557.724839 (overall best=536.107270; worst=563.533093)
+
+ctr=43 of 200, temp=1.298205, obj=537.603686 (overall best=535.713437; worst=568.249402)
+
+ctr=44 of 200, temp=1.285223, obj=544.247108 (overall best=529.759439; worst=574.431029)
+
+ctr=45 of 200, temp=1.272371, obj=546.146943 (overall best=529.759439; worst=555.602368)
+
+ctr=46 of 200, temp=1.259647, obj=539.732991 (overall best=529.759439; worst=552.388938)
+
+ctr=47 of 200, temp=1.247051, obj=532.414364 (overall best=528.142057; worst=544.804051)
+
+ctr=48 of 200, temp=1.234580, obj=535.488438 (overall best=527.960760; worst=557.064099)
+
+ctr=49 of 200, temp=1.222234, obj=538.512601 (overall best=527.960760; worst=551.660747)
+
+ctr=50 of 200, temp=1.210012, obj=549.191980 (overall best=527.960760; worst=549.856039)
+
+ctr=51 of 200, temp=1.197912, obj=536.976496 (overall best=527.960760; worst=566.741624)
+
+ctr=52 of 200, temp=1.185933, obj=535.272374 (overall best=527.960760; worst=540.013041)
+
+ctr=53 of 200, temp=1.174074, obj=537.275431 (overall best=527.960760; worst=545.287024)
+
+ctr=54 of 200, temp=1.162333, obj=530.291045 (overall best=527.960760; worst=547.656480)
+
+ctr=55 of 200, temp=1.150709, obj=539.235950 (overall best=527.960760; worst=559.198834)
+
+ctr=56 of 200, temp=1.139202, obj=550.535290 (overall best=527.960760; worst=565.683371)
+
+ctr=57 of 200, temp=1.127810, obj=532.507383 (overall best=527.960760; worst=550.535290)
+
+ctr=58 of 200, temp=1.116532, obj=543.603929 (overall best=527.960760; worst=550.556960)
+
+ctr=59 of 200, temp=1.105367, obj=537.991095 (overall best=527.960760; worst=549.540727)
+
+ctr=60 of 200, temp=1.094313, obj=544.514960 (overall best=527.960760; worst=546.327768)
+
+ctr=61 of 200, temp=1.083370, obj=536.577725 (overall best=527.960760; worst=548.327839)
+
+ctr=62 of 200, temp=1.072536, obj=538.879368 (overall best=527.960760; worst=540.621898)
+
+ctr=63 of 200, temp=1.061811, obj=536.888427 (overall best=527.960760; worst=545.695269)
+
+ctr=64 of 200, temp=1.051193, obj=543.710074 (overall best=527.960760; worst=551.882272)
+
+ctr=65 of 200, temp=1.040681, obj=540.267101 (overall best=527.960760; worst=559.466485)
+
+ctr=66 of 200, temp=1.030274, obj=546.183941 (overall best=527.960760; worst=548.927306)
+
+ctr=67 of 200, temp=1.019971, obj=541.204103 (overall best=527.960760; worst=548.593659)
+
+ctr=68 of 200, temp=1.009772, obj=547.969834 (overall best=527.960760; worst=548.440851)
+
+ctr=69 of 200, temp=0.999674, obj=533.257389 (overall best=527.960760; worst=547.969834)
+
+ctr=70 of 200, temp=0.989677, obj=539.000913 (overall best=527.960760; worst=546.860664)
+
+ctr=71 of 200, temp=0.979781, obj=535.873307 (overall best=527.943383; worst=539.000913)
+
+ctr=72 of 200, temp=0.969983, obj=539.523758 (overall best=527.943383; worst=541.712989)
+
+ctr=73 of 200, temp=0.960283, obj=533.236696 (overall best=527.943383; worst=542.215594)
+
+ctr=74 of 200, temp=0.950680, obj=528.142057 (overall best=527.943383; worst=539.205088)
+
+ctr=75 of 200, temp=0.941173, obj=535.827052 (overall best=527.943383; worst=539.457103)
+
+ctr=76 of 200, temp=0.931762, obj=540.492044 (overall best=527.943383; worst=543.278736)
+
+ctr=77 of 200, temp=0.922444, obj=531.211976 (overall best=527.943383; worst=544.775153)
+
+ctr=78 of 200, temp=0.913219, obj=535.570928 (overall best=527.943383; worst=548.921022)
+
+ctr=79 of 200, temp=0.904087, obj=534.148599 (overall best=527.943383; worst=536.932656)
+
+ctr=80 of 200, temp=0.895046, obj=529.007430 (overall best=527.943383; worst=536.818736)
+
+ctr=81 of 200, temp=0.886096, obj=534.771818 (overall best=527.943383; worst=544.913755)
+
+ctr=82 of 200, temp=0.877235, obj=527.960760 (overall best=527.943383; worst=540.321971)
+
+ctr=83 of 200, temp=0.868463, obj=527.960760 (overall best=527.943383; worst=545.421089)
+
+ctr=84 of 200, temp=0.859778, obj=533.650440 (overall best=527.943383; worst=534.355986)
+
+ctr=85 of 200, temp=0.851180, obj=539.340983 (overall best=527.943383; worst=542.176065)
+
+ctr=86 of 200, temp=0.842668, obj=529.759439 (overall best=527.943383; worst=543.363157)
+
+ctr=87 of 200, temp=0.834242, obj=531.299983 (overall best=527.943383; worst=541.905761)
+
+ctr=88 of 200, temp=0.825899, obj=527.960760 (overall best=527.943383; worst=535.557564)
+
+ctr=89 of 200, temp=0.817640, obj=532.033784 (overall best=527.943383; worst=543.525452)
+
+ctr=90 of 200, temp=0.809464, obj=532.190027 (overall best=527.943383; worst=540.951927)
+
+ctr=91 of 200, temp=0.801369, obj=535.272374 (overall best=527.943383; worst=538.712399)
+
+ctr=92 of 200, temp=0.793356, obj=532.172649 (overall best=527.943383; worst=538.364320)
+
+ctr=93 of 200, temp=0.785422, obj=532.190027 (overall best=527.943383; worst=537.719302)
+
+ctr=94 of 200, temp=0.777568, obj=531.564133 (overall best=527.943383; worst=537.051419)
+
+ctr=95 of 200, temp=0.769792, obj=531.913008 (overall best=527.943383; worst=535.222812)
+
+ctr=96 of 200, temp=0.762094, obj=531.841940 (overall best=527.943383; worst=538.844478)
+
+ctr=97 of 200, temp=0.754473, obj=529.425672 (overall best=527.943383; worst=536.722911)
+
+ctr=98 of 200, temp=0.746929, obj=529.830506 (overall best=527.943383; worst=537.020682)
+
+ctr=99 of 200, temp=0.739459, obj=533.167852 (overall best=527.943383; worst=536.437911)
+
+ctr=100 of 200, temp=0.732065, obj=534.076494 (overall best=527.943383; worst=536.161265)
+
+ctr=101 of 200, temp=0.724744, obj=530.966689 (overall best=527.943383; worst=538.124716)
+
+ctr=102 of 200, temp=0.717497, obj=527.960760 (overall best=527.943383; worst=534.815857)
+
+ctr=103 of 200, temp=0.710322, obj=530.238222 (overall best=527.943383; worst=543.200802)
+
+ctr=104 of 200, temp=0.703218, obj=529.830506 (overall best=527.943383; worst=533.490036)
+
+ctr=105 of 200, temp=0.696186, obj=532.322137 (overall best=527.943383; worst=536.265649)
+
+ctr=106 of 200, temp=0.689224, obj=529.408294 (overall best=527.943383; worst=535.886928)
+
+ctr=107 of 200, temp=0.682332, obj=533.155876 (overall best=527.943383; worst=533.804426)
+
+ctr=108 of 200, temp=0.675509, obj=530.099221 (overall best=527.943383; worst=533.950182)
+
+ctr=109 of 200, temp=0.668754, obj=527.960760 (overall best=527.943383; worst=538.338597)
+
+ctr=110 of 200, temp=0.662066, obj=529.759439 (overall best=527.943383; worst=537.519487)
+
+ctr=111 of 200, temp=0.655446, obj=529.830506 (overall best=527.943383; worst=534.634633)
+
+ctr=112 of 200, temp=0.648891, obj=527.943383 (overall best=527.943383; worst=530.219977)
+
+ctr=113 of 200, temp=0.642402, obj=528.755066 (overall best=527.943383; worst=535.793341)
+
+ctr=114 of 200, temp=0.635978, obj=529.759439 (overall best=527.943383; worst=530.624811)
+
+ctr=115 of 200, temp=0.629618, obj=534.918067 (overall best=527.943383; worst=539.840968)
+
+ctr=116 of 200, temp=0.623322, obj=530.043262 (overall best=527.943383; worst=535.595767)
+
+ctr=117 of 200, temp=0.617089, obj=528.755066 (overall best=527.943383; worst=534.996880)
+
+ctr=118 of 200, temp=0.610918, obj=528.826133 (overall best=527.943383; worst=532.822489)
+
+ctr=119 of 200, temp=0.604809, obj=528.826133 (overall best=527.943383; worst=531.320155)
+
+ctr=120 of 200, temp=0.598761, obj=527.960760 (overall best=527.943383; worst=529.425672)
+
+ctr=121 of 200, temp=0.592773, obj=528.755066 (overall best=527.943383; worst=530.624811)
+
+ctr=122 of 200, temp=0.586845, obj=528.755066 (overall best=527.943383; worst=534.170328)
+
+ctr=123 of 200, temp=0.580977, obj=527.960760 (overall best=527.943383; worst=530.910904)
+
+ctr=124 of 200, temp=0.575167, obj=527.943383 (overall best=527.943383; worst=536.044174)
+
+ctr=125 of 200, temp=0.569416, obj=528.755066 (overall best=527.943383; worst=533.143824)
+
+ctr=126 of 200, temp=0.563721, obj=529.813128 (overall best=527.943383; worst=534.733145)
+
+ctr=127 of 200, temp=0.558084, obj=527.943383 (overall best=527.943383; worst=531.085350)
+
+ctr=128 of 200, temp=0.552503, obj=531.879256 (overall best=527.943383; worst=533.991819)
+
+ctr=129 of 200, temp=0.546978, obj=528.965133 (overall best=527.943383; worst=531.879256)
+
+ctr=130 of 200, temp=0.541509, obj=527.960760 (overall best=527.943383; worst=533.710839)
+
+ctr=131 of 200, temp=0.536093, obj=527.943383 (overall best=527.943383; worst=531.299983)
+
+ctr=132 of 200, temp=0.530732, obj=529.620438 (overall best=527.943383; worst=532.216349)
+
+ctr=133 of 200, temp=0.525425, obj=527.960760 (overall best=527.943383; worst=530.291045)
+
+ctr=134 of 200, temp=0.520171, obj=528.965133 (overall best=527.943383; worst=535.359782)
+
+ctr=135 of 200, temp=0.514969, obj=527.960760 (overall best=527.943383; worst=532.258608)
+
+ctr=136 of 200, temp=0.509820, obj=528.755066 (overall best=527.943383; worst=530.099221)
+
+ctr=137 of 200, temp=0.504721, obj=527.960760 (overall best=527.943383; worst=530.910904)
+
+ctr=138 of 200, temp=0.499674, obj=530.172384 (overall best=527.943383; worst=532.431600)
+
+ctr=139 of 200, temp=0.494677, obj=530.297895 (overall best=527.943383; worst=531.723437)
+
+ctr=140 of 200, temp=0.489731, obj=529.432523 (overall best=527.943383; worst=530.297895)
+
+ctr=141 of 200, temp=0.484833, obj=529.007430 (overall best=527.943383; worst=531.233031)
+
+ctr=142 of 200, temp=0.479985, obj=532.281176 (overall best=527.943383; worst=532.281176)
+
+ctr=143 of 200, temp=0.475185, obj=527.960760 (overall best=527.943383; worst=532.281176)
+
+ctr=144 of 200, temp=0.470433, obj=527.943383 (overall best=527.943383; worst=528.826133)
+
+ctr=145 of 200, temp=0.465729, obj=528.755066 (overall best=527.943383; worst=530.291045)
+
+ctr=146 of 200, temp=0.461072, obj=528.808756 (overall best=527.943383; worst=529.830506)
+
+ctr=147 of 200, temp=0.456461, obj=527.960760 (overall best=527.943383; worst=534.171015)
+
+ctr=148 of 200, temp=0.451896, obj=529.233849 (overall best=527.943383; worst=533.993252)
+
+ctr=149 of 200, temp=0.447377, obj=528.808756 (overall best=527.943383; worst=530.273667)
+
+ctr=150 of 200, temp=0.442904, obj=528.826133 (overall best=527.943383; worst=530.291045)
+
+ctr=151 of 200, temp=0.438475, obj=529.759439 (overall best=527.943383; worst=529.830506)
+
+ctr=152 of 200, temp=0.434090, obj=527.943383 (overall best=527.943383; worst=530.698760)
+
+ctr=153 of 200, temp=0.429749, obj=527.960760 (overall best=527.943383; worst=530.238222)
+
+ctr=154 of 200, temp=0.425451, obj=527.960760 (overall best=527.943383; worst=530.273667)
+
+ctr=155 of 200, temp=0.421197, obj=529.620438 (overall best=527.943383; worst=530.624811)
+
+ctr=156 of 200, temp=0.416985, obj=527.943383 (overall best=527.943383; worst=530.219977)
+
+ctr=157 of 200, temp=0.412815, obj=528.947756 (overall best=527.943383; worst=529.813128)
+
+ctr=158 of 200, temp=0.408687, obj=527.943383 (overall best=527.943383; worst=529.813128)
+
+ctr=159 of 200, temp=0.404600, obj=527.960760 (overall best=527.943383; worst=529.233849)
+
+ctr=160 of 200, temp=0.400554, obj=528.755066 (overall best=527.943383; worst=531.564133)
+
+ctr=161 of 200, temp=0.396549, obj=529.813128 (overall best=527.943383; worst=529.813128)
+
+ctr=162 of 200, temp=0.392583, obj=527.943383 (overall best=527.943383; worst=531.085350)
+
+ctr=163 of 200, temp=0.388657, obj=527.943383 (overall best=527.943383; worst=528.755066)
+
+ctr=164 of 200, temp=0.384771, obj=528.965133 (overall best=527.943383; worst=529.830506)
+
+ctr=165 of 200, temp=0.380923, obj=527.960760 (overall best=527.943383; worst=529.620438)
+
+ctr=166 of 200, temp=0.377114, obj=528.965133 (overall best=527.943383; worst=529.759439)
+
+ctr=167 of 200, temp=0.373343, obj=527.960760 (overall best=527.943383; worst=533.358281)
+
+ctr=168 of 200, temp=0.369609, obj=528.965133 (overall best=527.943383; worst=529.830506)
+
+ctr=169 of 200, temp=0.365913, obj=527.960760 (overall best=527.943383; worst=530.219977)
+
+ctr=170 of 200, temp=0.362254, obj=527.960760 (overall best=527.943383; worst=529.425672)
+
+ctr=171 of 200, temp=0.358631, obj=527.960760 (overall best=527.943383; worst=528.808756)
+
+ctr=172 of 200, temp=0.355045, obj=530.291045 (overall best=527.943383; worst=530.291045)
+
+ctr=173 of 200, temp=0.351495, obj=528.826133 (overall best=527.943383; worst=530.291045)
+
+ctr=174 of 200, temp=0.347980, obj=528.826133 (overall best=527.943383; worst=529.620438)
+
+ctr=175 of 200, temp=0.344500, obj=527.960760 (overall best=527.943383; worst=528.826133)
+
+ctr=176 of 200, temp=0.341055, obj=527.960760 (overall best=527.943383; worst=529.813128)
+
+ctr=177 of 200, temp=0.337644, obj=531.037756 (overall best=527.943383; worst=532.502668)
+
+ctr=178 of 200, temp=0.334268, obj=529.007430 (overall best=527.943383; worst=531.123898)
+
+ctr=179 of 200, temp=0.330925, obj=528.142057 (overall best=527.943383; worst=530.472341)
+
+ctr=180 of 200, temp=0.327616, obj=528.142057 (overall best=527.943383; worst=531.302268)
+
+ctr=181 of 200, temp=0.324340, obj=528.142057 (overall best=527.943383; worst=529.007430)
+
+ctr=182 of 200, temp=0.321096, obj=529.007430 (overall best=527.943383; worst=529.007430)
+
+ctr=183 of 200, temp=0.317885, obj=529.432523 (overall best=527.943383; worst=529.432523)
+
+ctr=184 of 200, temp=0.314707, obj=528.142057 (overall best=527.943383; worst=529.432523)
+
+ctr=185 of 200, temp=0.311559, obj=528.142057 (overall best=527.943383; worst=529.606969)
+
+ctr=186 of 200, temp=0.308444, obj=529.007430 (overall best=527.943383; worst=529.606969)
+
+ctr=187 of 200, temp=0.305359, obj=529.146430 (overall best=527.943383; worst=529.146430)
+
+ctr=188 of 200, temp=0.302306, obj=528.142057 (overall best=527.943383; worst=529.146430)
+
+ctr=189 of 200, temp=0.299283, obj=529.007430 (overall best=527.943383; worst=529.007430)
+
+ctr=190 of 200, temp=0.296290, obj=528.142057 (overall best=527.943383; worst=529.007430)
+
+ctr=191 of 200, temp=0.293327, obj=528.142057 (overall best=527.943383; worst=529.007430)
+
+ctr=192 of 200, temp=0.290394, obj=529.146430 (overall best=527.943383; worst=529.146430)
+
+ctr=193 of 200, temp=0.287490, obj=528.142057 (overall best=527.943383; worst=530.436896)
+
+ctr=194 of 200, temp=0.284615, obj=528.142057 (overall best=527.943383; worst=529.606969)
+
+ctr=195 of 200, temp=0.281769, obj=528.142057 (overall best=527.943383; worst=529.606969)
+
+ctr=196 of 200, temp=0.278951, obj=528.142057 (overall best=527.943383; worst=530.011803)
+
+ctr=197 of 200, temp=0.276162, obj=528.142057 (overall best=527.943383; worst=529.007430)
+
+ctr=198 of 200, temp=0.273400, obj=528.142057 (overall best=527.943383; worst=529.007430)
+
+ctr=199 of 200, temp=0.270666, obj=528.142057 (overall best=527.943383; worst=529.007430)
+Improved solution: 527.943383
+CW[1.400000] solution: 791.339115
+
+ctr=0 of 200, temp=2.000000, obj=791.339115 (overall best=791.339115; worst=0.000000)
+
+ctr=1 of 200, temp=1.980000, obj=563.115287 (overall best=543.035189; worst=791.339115)
+
+ctr=2 of 200, temp=1.960200, obj=555.619311 (overall best=543.035189; worst=585.879674)
+
+ctr=3 of 200, temp=1.940598, obj=561.374237 (overall best=543.035189; worst=575.647883)
+
+ctr=4 of 200, temp=1.921192, obj=560.614924 (overall best=539.086879; worst=586.044814)
+
+ctr=5 of 200, temp=1.901980, obj=556.365837 (overall best=534.776685; worst=567.060100)
+
+ctr=6 of 200, temp=1.882960, obj=567.430206 (overall best=533.858368; worst=573.702157)
+
+ctr=7 of 200, temp=1.864131, obj=558.257603 (overall best=533.858368; worst=570.948625)
+
+ctr=8 of 200, temp=1.845489, obj=545.948852 (overall best=527.921999; worst=580.956801)
+
+ctr=9 of 200, temp=1.827034, obj=565.406651 (overall best=527.921999; worst=574.499656)
+
+ctr=10 of 200, temp=1.808764, obj=547.202153 (overall best=527.921999; worst=577.963223)
+
+ctr=11 of 200, temp=1.790677, obj=555.988654 (overall best=527.055579; worst=579.035206)
+
+ctr=12 of 200, temp=1.772770, obj=563.357646 (overall best=527.055579; worst=575.493603)
+
+ctr=13 of 200, temp=1.755042, obj=553.603162 (overall best=527.055579; worst=578.746406)
+
+ctr=14 of 200, temp=1.737492, obj=553.713668 (overall best=527.055579; worst=574.382265)
+
+ctr=15 of 200, temp=1.720117, obj=546.042810 (overall best=527.055579; worst=576.303213)
+
+ctr=16 of 200, temp=1.702916, obj=545.000850 (overall best=527.055579; worst=604.426391)
+
+ctr=17 of 200, temp=1.685886, obj=566.794671 (overall best=527.055579; worst=573.573824)
+
+ctr=18 of 200, temp=1.669028, obj=555.252798 (overall best=527.055579; worst=583.874941)
+
+ctr=19 of 200, temp=1.652337, obj=557.009051 (overall best=527.055579; worst=577.163471)
+
+ctr=20 of 200, temp=1.635814, obj=551.570764 (overall best=527.055579; worst=580.205192)
+
+ctr=21 of 200, temp=1.619456, obj=579.126903 (overall best=527.055579; worst=589.980446)
+
+ctr=22 of 200, temp=1.603261, obj=562.852376 (overall best=527.055579; worst=592.689162)
+
+ctr=23 of 200, temp=1.587229, obj=551.002873 (overall best=527.055579; worst=562.852376)
+
+ctr=24 of 200, temp=1.571356, obj=550.439481 (overall best=527.055579; worst=558.821455)
+
+ctr=25 of 200, temp=1.555643, obj=547.117948 (overall best=527.055579; worst=558.674218)
+
+ctr=26 of 200, temp=1.540086, obj=546.730012 (overall best=527.055579; worst=552.893171)
+
+ctr=27 of 200, temp=1.524685, obj=537.460795 (overall best=527.055579; worst=557.316233)
+
+ctr=28 of 200, temp=1.509439, obj=536.181248 (overall best=527.055579; worst=569.766889)
+
+ctr=29 of 200, temp=1.494344, obj=534.485941 (overall best=527.055579; worst=565.607230)
+
+ctr=30 of 200, temp=1.479401, obj=547.979716 (overall best=527.055579; worst=562.416119)
+
+ctr=31 of 200, temp=1.464607, obj=544.240114 (overall best=527.055579; worst=556.415467)
+
+ctr=32 of 200, temp=1.449961, obj=557.789755 (overall best=527.055579; worst=560.872103)
+
+ctr=33 of 200, temp=1.435461, obj=552.013243 (overall best=527.055579; worst=569.854191)
+
+ctr=34 of 200, temp=1.421106, obj=554.579861 (overall best=527.055579; worst=560.289732)
+
+ctr=35 of 200, temp=1.406895, obj=555.080580 (overall best=527.055579; worst=568.888917)
+
+ctr=36 of 200, temp=1.392826, obj=547.026518 (overall best=527.055579; worst=556.126091)
+
+ctr=37 of 200, temp=1.378898, obj=536.037073 (overall best=527.055579; worst=559.944683)
+
+ctr=38 of 200, temp=1.365109, obj=538.883477 (overall best=527.055579; worst=553.985412)
+
+ctr=39 of 200, temp=1.351458, obj=555.806174 (overall best=527.055579; worst=563.297809)
+
+ctr=40 of 200, temp=1.337944, obj=530.676407 (overall best=527.055579; worst=557.518735)
+
+ctr=41 of 200, temp=1.324564, obj=544.049209 (overall best=527.055579; worst=551.618749)
+
+ctr=42 of 200, temp=1.311318, obj=540.572974 (overall best=525.948610; worst=552.511643)
+
+ctr=43 of 200, temp=1.298205, obj=537.454257 (overall best=525.948610; worst=551.188580)
+
+ctr=44 of 200, temp=1.285223, obj=536.919935 (overall best=525.948610; worst=551.188427)
+
+ctr=45 of 200, temp=1.272371, obj=549.409294 (overall best=525.948610; worst=551.390624)
+
+ctr=46 of 200, temp=1.259647, obj=546.124721 (overall best=525.948610; worst=553.418883)
+
+ctr=47 of 200, temp=1.247051, obj=541.548119 (overall best=525.948610; worst=552.565055)
+
+ctr=48 of 200, temp=1.234580, obj=542.923308 (overall best=525.948610; worst=549.199476)
+
+ctr=49 of 200, temp=1.222234, obj=532.596079 (overall best=525.948610; worst=551.298320)
+
+ctr=50 of 200, temp=1.210012, obj=534.239505 (overall best=525.948610; worst=540.368373)
+
+ctr=51 of 200, temp=1.197912, obj=530.165045 (overall best=525.792232; worst=545.189784)
+
+ctr=52 of 200, temp=1.185933, obj=534.902466 (overall best=525.792232; worst=546.393598)
+
+ctr=53 of 200, temp=1.174074, obj=532.130011 (overall best=525.792232; worst=547.451450)
+
+ctr=54 of 200, temp=1.162333, obj=542.232194 (overall best=525.792232; worst=549.291071)
+
+ctr=55 of 200, temp=1.150709, obj=525.931232 (overall best=525.792232; worst=551.975629)
+
+ctr=56 of 200, temp=1.139202, obj=542.880465 (overall best=525.792232; worst=543.796552)
+
+ctr=57 of 200, temp=1.127810, obj=533.562823 (overall best=525.493897; worst=544.876254)
+
+ctr=58 of 200, temp=1.116532, obj=529.721414 (overall best=525.493897; worst=548.445610)
+
+ctr=59 of 200, temp=1.105367, obj=527.208035 (overall best=525.493897; worst=557.633261)
+
+ctr=60 of 200, temp=1.094313, obj=533.255725 (overall best=525.493897; worst=544.084965)
+
+ctr=61 of 200, temp=1.083370, obj=526.742915 (overall best=525.422830; worst=539.375059)
+
+ctr=62 of 200, temp=1.072536, obj=524.611147 (overall best=524.611147; worst=544.333552)
+
+ctr=63 of 200, temp=1.061811, obj=541.735275 (overall best=524.611147; worst=543.727540)
+
+ctr=64 of 200, temp=1.051193, obj=531.646302 (overall best=524.611147; worst=545.829588)
+
+ctr=65 of 200, temp=1.040681, obj=530.048175 (overall best=524.611147; worst=544.743547)
+
+ctr=66 of 200, temp=1.030274, obj=535.754281 (overall best=524.611147; worst=544.652340)
+
+ctr=67 of 200, temp=1.019971, obj=529.188575 (overall best=524.611147; worst=538.231653)
+
+ctr=68 of 200, temp=1.009772, obj=527.968996 (overall best=524.611147; worst=540.982880)
+
+ctr=69 of 200, temp=0.999674, obj=526.190206 (overall best=524.611147; worst=543.851577)
+
+ctr=70 of 200, temp=0.989677, obj=534.977547 (overall best=524.611147; worst=543.717442)
+
+ctr=71 of 200, temp=0.979781, obj=534.758921 (overall best=524.611147; worst=540.455284)
+
+ctr=72 of 200, temp=0.969983, obj=528.792122 (overall best=524.611147; worst=538.714441)
+
+ctr=73 of 200, temp=0.960283, obj=528.815538 (overall best=524.611147; worst=538.903272)
+
+ctr=74 of 200, temp=0.950680, obj=533.671047 (overall best=524.611147; worst=538.740431)
+
+ctr=75 of 200, temp=0.941173, obj=534.695158 (overall best=524.611147; worst=537.848219)
+
+ctr=76 of 200, temp=0.931762, obj=531.866130 (overall best=524.611147; worst=547.229662)
+
+ctr=77 of 200, temp=0.922444, obj=530.969241 (overall best=524.611147; worst=536.704634)
+
+ctr=78 of 200, temp=0.913219, obj=532.769573 (overall best=524.611147; worst=544.591939)
+
+ctr=79 of 200, temp=0.904087, obj=529.526013 (overall best=524.611147; worst=545.344046)
+
+ctr=80 of 200, temp=0.895046, obj=533.114983 (overall best=524.611147; worst=542.137820)
+
+ctr=81 of 200, temp=0.886096, obj=530.545605 (overall best=524.611147; worst=540.647709)
+
+ctr=82 of 200, temp=0.877235, obj=525.422830 (overall best=524.611147; worst=534.533671)
+
+ctr=83 of 200, temp=0.868463, obj=528.911404 (overall best=524.611147; worst=537.038519)
+
+ctr=84 of 200, temp=0.859778, obj=540.968007 (overall best=524.611147; worst=541.063491)
+
+ctr=85 of 200, temp=0.851180, obj=530.117296 (overall best=524.611147; worst=546.397421)
+
+ctr=86 of 200, temp=0.842668, obj=532.051475 (overall best=524.611147; worst=533.901504)
+
+ctr=87 of 200, temp=0.834242, obj=542.358989 (overall best=524.611147; worst=542.358989)
+
+ctr=88 of 200, temp=0.825899, obj=525.809610 (overall best=524.611147; worst=545.692113)
+
+ctr=89 of 200, temp=0.817640, obj=535.631105 (overall best=524.611147; worst=537.866798)
+
+ctr=90 of 200, temp=0.809464, obj=528.505177 (overall best=524.611147; worst=535.631105)
+
+ctr=91 of 200, temp=0.801369, obj=532.761270 (overall best=524.611147; worst=536.128099)
+
+ctr=92 of 200, temp=0.793356, obj=530.201135 (overall best=524.611147; worst=533.837596)
+
+ctr=93 of 200, temp=0.785422, obj=533.362402 (overall best=524.611147; worst=534.156707)
+
+ctr=94 of 200, temp=0.777568, obj=529.491827 (overall best=524.611147; worst=535.297054)
+
+ctr=95 of 200, temp=0.769792, obj=537.125761 (overall best=524.611147; worst=541.756169)
+
+ctr=96 of 200, temp=0.762094, obj=528.708553 (overall best=524.611147; worst=543.047907)
+
+ctr=97 of 200, temp=0.754473, obj=527.009361 (overall best=524.611147; worst=531.526674)
+
+ctr=98 of 200, temp=0.746929, obj=527.347936 (overall best=524.611147; worst=534.355346)
+
+ctr=99 of 200, temp=0.739459, obj=527.347936 (overall best=524.611147; worst=538.047284)
+
+ctr=100 of 200, temp=0.732065, obj=524.926859 (overall best=524.611147; worst=535.771778)
+
+ctr=101 of 200, temp=0.724744, obj=532.007383 (overall best=524.611147; worst=533.329059)
+
+ctr=102 of 200, temp=0.717497, obj=530.332402 (overall best=524.611147; worst=540.061774)
+
+ctr=103 of 200, temp=0.710322, obj=530.229770 (overall best=524.611147; worst=536.714579)
+
+ctr=104 of 200, temp=0.703218, obj=529.328029 (overall best=524.611147; worst=537.860072)
+
+ctr=105 of 200, temp=0.696186, obj=529.155860 (overall best=524.611147; worst=535.610578)
+
+ctr=106 of 200, temp=0.689224, obj=527.026739 (overall best=524.611147; worst=531.871987)
+
+ctr=107 of 200, temp=0.682332, obj=524.944237 (overall best=524.611147; worst=530.872283)
+
+ctr=108 of 200, temp=0.675509, obj=524.944237 (overall best=524.611147; worst=532.580226)
+
+ctr=109 of 200, temp=0.668754, obj=532.454669 (overall best=524.611147; worst=533.357603)
+
+ctr=110 of 200, temp=0.662066, obj=525.737875 (overall best=524.611147; worst=532.454669)
+
+ctr=111 of 200, temp=0.655446, obj=526.409149 (overall best=524.611147; worst=535.311174)
+
+ctr=112 of 200, temp=0.648891, obj=529.505818 (overall best=524.611147; worst=531.285287)
+
+ctr=113 of 200, temp=0.642402, obj=526.742915 (overall best=524.611147; worst=531.172801)
+
+ctr=114 of 200, temp=0.635978, obj=524.628524 (overall best=524.611147; worst=528.938158)
+
+ctr=115 of 200, temp=0.629618, obj=525.948610 (overall best=524.611147; worst=531.305465)
+
+ctr=116 of 200, temp=0.623322, obj=525.422830 (overall best=524.611147; worst=529.434751)
+
+ctr=117 of 200, temp=0.617089, obj=527.274521 (overall best=524.611147; worst=531.805858)
+
+ctr=118 of 200, temp=0.610918, obj=527.950165 (overall best=524.611147; worst=535.496650)
+
+ctr=119 of 200, temp=0.604809, obj=526.944237 (overall best=524.611147; worst=531.178375)
+
+ctr=120 of 200, temp=0.598761, obj=526.288202 (overall best=524.611147; worst=529.387757)
+
+ctr=121 of 200, temp=0.592773, obj=524.628524 (overall best=524.611147; worst=530.919140)
+
+ctr=122 of 200, temp=0.586845, obj=524.944237 (overall best=524.611147; worst=530.365961)
+
+ctr=123 of 200, temp=0.580977, obj=524.944237 (overall best=524.611147; worst=531.207130)
+
+ctr=124 of 200, temp=0.575167, obj=525.738542 (overall best=524.611147; worst=531.048998)
+
+ctr=125 of 200, temp=0.569416, obj=529.641817 (overall best=524.611147; worst=530.016225)
+
+ctr=126 of 200, temp=0.563721, obj=526.603915 (overall best=524.611147; worst=529.641817)
+
+ctr=127 of 200, temp=0.558084, obj=525.809610 (overall best=524.611147; worst=532.766093)
+
+ctr=128 of 200, temp=0.552503, obj=525.738542 (overall best=524.611147; worst=530.365496)
+
+ctr=129 of 200, temp=0.546978, obj=528.021233 (overall best=524.611147; worst=531.594087)
+
+ctr=130 of 200, temp=0.541509, obj=526.532181 (overall best=524.611147; worst=529.304200)
+
+ctr=131 of 200, temp=0.536093, obj=526.172829 (overall best=524.611147; worst=527.608288)
+
+ctr=132 of 200, temp=0.530732, obj=524.926859 (overall best=524.611147; worst=529.749446)
+
+ctr=133 of 200, temp=0.525425, obj=524.628524 (overall best=524.611147; worst=529.785921)
+
+ctr=134 of 200, temp=0.520171, obj=525.720498 (overall best=524.611147; worst=532.402378)
+
+ctr=135 of 200, temp=0.514969, obj=525.792232 (overall best=524.611147; worst=528.603915)
+
+ctr=136 of 200, temp=0.509820, obj=528.321009 (overall best=524.611147; worst=530.580226)
+
+ctr=137 of 200, temp=0.504721, obj=530.325704 (overall best=524.611147; worst=531.138761)
+
+ctr=138 of 200, temp=0.499674, obj=527.809610 (overall best=524.611147; worst=530.408205)
+
+ctr=139 of 200, temp=0.494677, obj=525.720498 (overall best=524.611147; worst=531.948110)
+
+ctr=140 of 200, temp=0.489731, obj=525.720498 (overall best=524.611147; worst=529.739885)
+
+ctr=141 of 200, temp=0.484833, obj=526.603915 (overall best=524.611147; worst=527.203454)
+
+ctr=142 of 200, temp=0.479985, obj=524.944237 (overall best=524.611147; worst=530.920384)
+
+ctr=143 of 200, temp=0.475185, obj=527.026739 (overall best=524.611147; worst=530.633916)
+
+ctr=144 of 200, temp=0.470433, obj=526.813983 (overall best=524.611147; worst=528.847512)
+
+ctr=145 of 200, temp=0.465729, obj=524.611147 (overall best=524.611147; worst=526.813983)
+
+ctr=146 of 200, temp=0.461072, obj=524.944237 (overall best=524.611147; worst=526.409149)
+
+ctr=147 of 200, temp=0.456461, obj=524.944237 (overall best=524.611147; worst=527.608288)
+
+ctr=148 of 200, temp=0.451896, obj=524.944237 (overall best=524.611147; worst=527.274521)
+
+ctr=149 of 200, temp=0.447377, obj=525.792232 (overall best=524.611147; worst=527.055579)
+
+ctr=150 of 200, temp=0.442904, obj=524.926859 (overall best=524.611147; worst=526.603915)
+
+ctr=151 of 200, temp=0.438475, obj=525.476519 (overall best=524.611147; worst=529.608288)
+
+ctr=152 of 200, temp=0.434090, obj=525.738542 (overall best=524.611147; worst=525.948610)
+
+ctr=153 of 200, temp=0.429749, obj=524.944237 (overall best=524.611147; worst=529.359292)
+
+ctr=154 of 200, temp=0.425451, obj=524.926859 (overall best=524.611147; worst=527.203454)
+
+ctr=155 of 200, temp=0.421197, obj=527.636072 (overall best=524.611147; worst=528.430378)
+
+ctr=156 of 200, temp=0.416985, obj=525.737875 (overall best=524.611147; worst=529.434751)
+
+ctr=157 of 200, temp=0.412815, obj=524.944237 (overall best=524.611147; worst=527.792232)
+
+ctr=158 of 200, temp=0.408687, obj=525.792232 (overall best=524.611147; worst=526.603915)
+
+ctr=159 of 200, temp=0.404600, obj=525.738542 (overall best=524.611147; worst=526.190206)
+
+ctr=160 of 200, temp=0.400554, obj=525.493897 (overall best=524.611147; worst=527.948610)
+
+ctr=161 of 200, temp=0.396549, obj=526.742915 (overall best=524.611147; worst=526.742915)
+
+ctr=162 of 200, temp=0.392583, obj=524.628524 (overall best=524.611147; worst=526.742915)
+
+ctr=163 of 200, temp=0.388657, obj=525.948610 (overall best=524.611147; worst=525.948610)
+
+ctr=164 of 200, temp=0.384771, obj=524.611147 (overall best=524.611147; worst=527.876336)
+
+ctr=165 of 200, temp=0.380923, obj=524.611147 (overall best=524.611147; worst=525.493897)
+
+ctr=166 of 200, temp=0.377114, obj=526.190206 (overall best=524.611147; worst=526.984511)
+
+ctr=167 of 200, temp=0.373343, obj=524.628524 (overall best=524.611147; worst=526.742915)
+
+ctr=168 of 200, temp=0.369609, obj=524.628524 (overall best=524.611147; worst=526.603248)
+
+ctr=169 of 200, temp=0.365913, obj=524.628524 (overall best=524.611147; worst=525.493897)
+
+ctr=170 of 200, temp=0.362254, obj=525.422830 (overall best=524.611147; worst=525.737875)
+
+ctr=171 of 200, temp=0.358631, obj=525.422830 (overall best=524.611147; worst=526.288202)
+
+ctr=172 of 200, temp=0.355045, obj=527.974373 (overall best=524.611147; worst=527.974373)
+
+ctr=173 of 200, temp=0.351495, obj=525.476519 (overall best=524.611147; worst=527.974373)
+
+ctr=174 of 200, temp=0.347980, obj=524.611147 (overall best=524.611147; worst=525.493897)
+
+ctr=175 of 200, temp=0.344500, obj=524.611147 (overall best=524.611147; worst=527.397553)
+
+ctr=176 of 200, temp=0.341055, obj=524.611147 (overall best=524.611147; worst=525.493897)
+
+ctr=177 of 200, temp=0.337644, obj=526.813983 (overall best=524.611147; worst=526.813983)
+
+ctr=178 of 200, temp=0.334268, obj=524.611147 (overall best=524.611147; worst=526.813983)
+
+ctr=179 of 200, temp=0.330925, obj=524.611147 (overall best=524.611147; worst=526.603248)
+
+ctr=180 of 200, temp=0.327616, obj=524.611147 (overall best=524.611147; worst=526.288202)
+
+ctr=181 of 200, temp=0.324340, obj=524.628524 (overall best=524.611147; worst=525.493897)
+
+ctr=182 of 200, temp=0.321096, obj=524.628524 (overall best=524.611147; worst=525.931232)
+
+ctr=183 of 200, temp=0.317885, obj=524.628524 (overall best=524.611147; worst=526.813983)
+
+ctr=184 of 200, temp=0.314707, obj=524.628524 (overall best=524.611147; worst=526.288202)
+
+ctr=185 of 200, temp=0.311559, obj=524.611147 (overall best=524.611147; worst=526.532181)
+
+ctr=186 of 200, temp=0.308444, obj=526.813983 (overall best=524.611147; worst=526.813983)
+
+ctr=187 of 200, temp=0.305359, obj=524.628524 (overall best=524.611147; worst=526.813983)
+
+ctr=188 of 200, temp=0.302306, obj=524.628524 (overall best=524.611147; worst=527.397553)
+
+ctr=189 of 200, temp=0.299283, obj=524.611147 (overall best=524.611147; worst=525.493897)
+
+ctr=190 of 200, temp=0.296290, obj=524.628524 (overall best=524.611147; worst=525.476519)
+
+ctr=191 of 200, temp=0.293327, obj=524.628524 (overall best=524.611147; worst=525.476519)
+
+ctr=192 of 200, temp=0.290394, obj=525.948610 (overall best=524.611147; worst=526.742915)
+
+ctr=193 of 200, temp=0.287490, obj=524.628524 (overall best=524.611147; worst=525.948610)
+
+ctr=194 of 200, temp=0.284615, obj=524.628524 (overall best=524.611147; worst=525.422830)
+
+ctr=195 of 200, temp=0.281769, obj=524.628524 (overall best=524.611147; worst=525.948610)
+
+ctr=196 of 200, temp=0.278951, obj=524.628524 (overall best=524.611147; worst=524.628524)
+
+ctr=197 of 200, temp=0.276162, obj=524.611147 (overall best=524.611147; worst=525.422830)
+
+ctr=198 of 200, temp=0.273400, obj=524.628524 (overall best=524.611147; worst=525.948610)
+
+ctr=199 of 200, temp=0.270666, obj=524.628524 (overall best=524.611147; worst=525.476519)
+Improved solution: 524.611147
+CW[1.600000] solution: 813.620251
+
+ctr=0 of 200, temp=2.000000, obj=813.620251 (overall best=813.620251; worst=0.000000)
+
+ctr=1 of 200, temp=1.980000, obj=558.160884 (overall best=548.757042; worst=815.448987)
+
+ctr=2 of 200, temp=1.960200, obj=562.364452 (overall best=547.678449; worst=579.736209)
+
+ctr=3 of 200, temp=1.940598, obj=551.350558 (overall best=541.773088; worst=585.892420)
+
+ctr=4 of 200, temp=1.921192, obj=570.144218 (overall best=529.156126; worst=581.530176)
+
+ctr=5 of 200, temp=1.901980, obj=555.379312 (overall best=529.156126; worst=576.346497)
+
+ctr=6 of 200, temp=1.882960, obj=579.803289 (overall best=529.156126; worst=597.016279)
+
+ctr=7 of 200, temp=1.864131, obj=574.489758 (overall best=529.156126; worst=598.612955)
+
+ctr=8 of 200, temp=1.845489, obj=584.799085 (overall best=529.156126; worst=590.263750)
+
+ctr=9 of 200, temp=1.827034, obj=560.206976 (overall best=529.156126; worst=593.289325)
+
+ctr=10 of 200, temp=1.808764, obj=589.808909 (overall best=529.156126; worst=619.413810)
+
+ctr=11 of 200, temp=1.790677, obj=592.780678 (overall best=529.156126; worst=627.790526)
+
+ctr=12 of 200, temp=1.772770, obj=575.177230 (overall best=529.156126; worst=595.959365)
+
+ctr=13 of 200, temp=1.755042, obj=564.122080 (overall best=529.156126; worst=606.755116)
+
+ctr=14 of 200, temp=1.737492, obj=578.227732 (overall best=529.156126; worst=589.180573)
+
+ctr=15 of 200, temp=1.720117, obj=548.738977 (overall best=529.156126; worst=601.871355)
+
+ctr=16 of 200, temp=1.702916, obj=557.340580 (overall best=529.156126; worst=573.862153)
+
+ctr=17 of 200, temp=1.685886, obj=553.593629 (overall best=529.156126; worst=570.058053)
+
+ctr=18 of 200, temp=1.669028, obj=557.406304 (overall best=529.156126; worst=562.713513)
+
+ctr=19 of 200, temp=1.652337, obj=562.750524 (overall best=529.156126; worst=577.073368)
+
+ctr=20 of 200, temp=1.635814, obj=542.218494 (overall best=529.156126; worst=578.699921)
+
+ctr=21 of 200, temp=1.619456, obj=548.826557 (overall best=529.156126; worst=559.830312)
+
+ctr=22 of 200, temp=1.603261, obj=541.633947 (overall best=529.156126; worst=555.875873)
+
+ctr=23 of 200, temp=1.587229, obj=571.348166 (overall best=529.156126; worst=572.164528)
+
+ctr=24 of 200, temp=1.571356, obj=546.274790 (overall best=529.156126; worst=571.348166)
+
+ctr=25 of 200, temp=1.555643, obj=553.126173 (overall best=529.156126; worst=558.331367)
+
+ctr=26 of 200, temp=1.540086, obj=548.948928 (overall best=527.501656; worst=567.667003)
+
+ctr=27 of 200, temp=1.524685, obj=541.153591 (overall best=527.501656; worst=555.889369)
+
+ctr=28 of 200, temp=1.509439, obj=546.477219 (overall best=527.501656; worst=562.359307)
+
+ctr=29 of 200, temp=1.494344, obj=541.398969 (overall best=527.501656; worst=559.337961)
+
+ctr=30 of 200, temp=1.479401, obj=566.768201 (overall best=527.501656; worst=599.251589)
+
+ctr=31 of 200, temp=1.464607, obj=567.226812 (overall best=527.501656; worst=586.616112)
+
+ctr=32 of 200, temp=1.449961, obj=555.029719 (overall best=527.501656; worst=567.226812)
+
+ctr=33 of 200, temp=1.435461, obj=554.300470 (overall best=527.501656; worst=561.333886)
+
+ctr=34 of 200, temp=1.421106, obj=553.214899 (overall best=527.501656; worst=567.339184)
+
+ctr=35 of 200, temp=1.406895, obj=545.442046 (overall best=527.501656; worst=565.895710)
+
+ctr=36 of 200, temp=1.392826, obj=548.831644 (overall best=527.501656; worst=552.850919)
+
+ctr=37 of 200, temp=1.378898, obj=546.263967 (overall best=527.501656; worst=559.264118)
+
+ctr=38 of 200, temp=1.365109, obj=540.080763 (overall best=527.501656; worst=562.831292)
+
+ctr=39 of 200, temp=1.351458, obj=550.088598 (overall best=527.501656; worst=563.571044)
+
+ctr=40 of 200, temp=1.337944, obj=537.245633 (overall best=527.501656; worst=560.074705)
+
+ctr=41 of 200, temp=1.324564, obj=533.024004 (overall best=525.809610; worst=547.350317)
+
+ctr=42 of 200, temp=1.311318, obj=532.160510 (overall best=525.809610; worst=554.561336)
+
+ctr=43 of 200, temp=1.298205, obj=531.953141 (overall best=525.809610; worst=557.917122)
+
+ctr=44 of 200, temp=1.285223, obj=534.217322 (overall best=524.944237; worst=545.778897)
+
+ctr=45 of 200, temp=1.272371, obj=531.328391 (overall best=524.944237; worst=548.767388)
+
+ctr=46 of 200, temp=1.259647, obj=535.832483 (overall best=524.944237; worst=545.952142)
+
+ctr=47 of 200, temp=1.247051, obj=543.821970 (overall best=524.628524; worst=547.489592)
+
+ctr=48 of 200, temp=1.234580, obj=534.428454 (overall best=524.628524; worst=551.308027)
+
+ctr=49 of 200, temp=1.222234, obj=538.237493 (overall best=524.628524; worst=562.306488)
+
+ctr=50 of 200, temp=1.210012, obj=540.036275 (overall best=524.628524; worst=546.329385)
+
+ctr=51 of 200, temp=1.197912, obj=536.675319 (overall best=524.628524; worst=550.728250)
+
+ctr=52 of 200, temp=1.185933, obj=536.735161 (overall best=524.628524; worst=548.502476)
+
+ctr=53 of 200, temp=1.174074, obj=530.596460 (overall best=524.628524; worst=550.292736)
+
+ctr=54 of 200, temp=1.162333, obj=529.273980 (overall best=524.628524; worst=537.201308)
+
+ctr=55 of 200, temp=1.150709, obj=540.461678 (overall best=524.628524; worst=552.598571)
+
+ctr=56 of 200, temp=1.139202, obj=547.401734 (overall best=524.628524; worst=547.401734)
+
+ctr=57 of 200, temp=1.127810, obj=532.336218 (overall best=524.628524; worst=551.694327)
+
+ctr=58 of 200, temp=1.116532, obj=530.645727 (overall best=524.611147; worst=543.528490)
+
+ctr=59 of 200, temp=1.105367, obj=535.205367 (overall best=524.611147; worst=549.955747)
+
+ctr=60 of 200, temp=1.094313, obj=540.828740 (overall best=524.611147; worst=546.528850)
+
+ctr=61 of 200, temp=1.083370, obj=533.996998 (overall best=524.611147; worst=542.736878)
+
+ctr=62 of 200, temp=1.072536, obj=537.480124 (overall best=524.611147; worst=541.187731)
+
+ctr=63 of 200, temp=1.061811, obj=535.124509 (overall best=524.611147; worst=542.015535)
+
+ctr=64 of 200, temp=1.051193, obj=535.110816 (overall best=524.611147; worst=547.565595)
+
+ctr=65 of 200, temp=1.040681, obj=531.180387 (overall best=524.611147; worst=537.983758)
+
+ctr=66 of 200, temp=1.030274, obj=535.427509 (overall best=524.611147; worst=553.574870)
+
+ctr=67 of 200, temp=1.019971, obj=530.596079 (overall best=524.611147; worst=536.390158)
+
+ctr=68 of 200, temp=1.009772, obj=527.836040 (overall best=524.611147; worst=539.300440)
+
+ctr=69 of 200, temp=0.999674, obj=541.005269 (overall best=524.611147; worst=542.173982)
+
+ctr=70 of 200, temp=0.989677, obj=534.466353 (overall best=524.611147; worst=542.849549)
+
+ctr=71 of 200, temp=0.979781, obj=528.370704 (overall best=524.611147; worst=538.691633)
+
+ctr=72 of 200, temp=0.969983, obj=529.937445 (overall best=524.611147; worst=537.041968)
+
+ctr=73 of 200, temp=0.960283, obj=532.698517 (overall best=524.611147; worst=546.812709)
+
+ctr=74 of 200, temp=0.950680, obj=527.894381 (overall best=524.611147; worst=545.111109)
+
+ctr=75 of 200, temp=0.941173, obj=531.570084 (overall best=524.611147; worst=539.187051)
+
+ctr=76 of 200, temp=0.931762, obj=536.718957 (overall best=524.611147; worst=536.718957)
+
+ctr=77 of 200, temp=0.922444, obj=524.944237 (overall best=524.611147; worst=539.696317)
+
+ctr=78 of 200, temp=0.913219, obj=526.784545 (overall best=524.611147; worst=537.436701)
+
+ctr=79 of 200, temp=0.904087, obj=530.939621 (overall best=524.611147; worst=536.022036)
+
+ctr=80 of 200, temp=0.895046, obj=537.370203 (overall best=524.611147; worst=542.517366)
+
+ctr=81 of 200, temp=0.886096, obj=534.924410 (overall best=524.611147; worst=541.358269)
+
+ctr=82 of 200, temp=0.877235, obj=530.781325 (overall best=524.611147; worst=538.047103)
+
+ctr=83 of 200, temp=0.868463, obj=529.546807 (overall best=524.611147; worst=536.026265)
+
+ctr=84 of 200, temp=0.859778, obj=530.874611 (overall best=524.611147; worst=543.175489)
+
+ctr=85 of 200, temp=0.851180, obj=525.493897 (overall best=524.611147; worst=530.874611)
+
+ctr=86 of 200, temp=0.842668, obj=534.912118 (overall best=524.611147; worst=538.288891)
+
+ctr=87 of 200, temp=0.834242, obj=529.001167 (overall best=524.611147; worst=537.305032)
+
+ctr=88 of 200, temp=0.825899, obj=529.660364 (overall best=524.611147; worst=535.949345)
+
+ctr=89 of 200, temp=0.817640, obj=530.254693 (overall best=524.611147; worst=533.631422)
+
+ctr=90 of 200, temp=0.809464, obj=532.973690 (overall best=524.611147; worst=534.864419)
+
+ctr=91 of 200, temp=0.801369, obj=526.603915 (overall best=524.611147; worst=535.552210)
+
+ctr=92 of 200, temp=0.793356, obj=525.792232 (overall best=524.611147; worst=534.686148)
+
+ctr=93 of 200, temp=0.785422, obj=531.818345 (overall best=524.611147; worst=535.734494)
+
+ctr=94 of 200, temp=0.777568, obj=533.408394 (overall best=524.611147; worst=536.680074)
+
+ctr=95 of 200, temp=0.769792, obj=525.422830 (overall best=524.611147; worst=536.345302)
+
+ctr=96 of 200, temp=0.762094, obj=533.532557 (overall best=524.611147; worst=533.532557)
+
+ctr=97 of 200, temp=0.754473, obj=527.026739 (overall best=524.611147; worst=540.818504)
+
+ctr=98 of 200, temp=0.746929, obj=526.288202 (overall best=524.611147; worst=529.690790)
+
+ctr=99 of 200, temp=0.739459, obj=525.493897 (overall best=524.611147; worst=531.366250)
+
+ctr=100 of 200, temp=0.732065, obj=531.205639 (overall best=524.611147; worst=533.550401)
+
+ctr=101 of 200, temp=0.724744, obj=529.186382 (overall best=524.611147; worst=533.842437)
+
+ctr=102 of 200, temp=0.717497, obj=528.171240 (overall best=524.611147; worst=532.275526)
+
+ctr=103 of 200, temp=0.710322, obj=528.160233 (overall best=524.611147; worst=535.071126)
+
+ctr=104 of 200, temp=0.703218, obj=526.603248 (overall best=524.611147; worst=532.450267)
+
+ctr=105 of 200, temp=0.696186, obj=526.706328 (overall best=524.611147; worst=531.826323)
+
+ctr=106 of 200, temp=0.689224, obj=529.687610 (overall best=524.611147; worst=535.560190)
+
+ctr=107 of 200, temp=0.682332, obj=525.422830 (overall best=524.611147; worst=535.454404)
+
+ctr=108 of 200, temp=0.675509, obj=524.944237 (overall best=524.611147; worst=529.737620)
+
+ctr=109 of 200, temp=0.668754, obj=524.926859 (overall best=524.611147; worst=532.008663)
+
+ctr=110 of 200, temp=0.662066, obj=527.307674 (overall best=524.611147; worst=535.793433)
+
+ctr=111 of 200, temp=0.655446, obj=526.706328 (overall best=524.611147; worst=534.372941)
+
+ctr=112 of 200, temp=0.648891, obj=529.823640 (overall best=524.611147; worst=533.926206)
+
+ctr=113 of 200, temp=0.642402, obj=526.969814 (overall best=524.611147; worst=531.483929)
+
+ctr=114 of 200, temp=0.635978, obj=525.919172 (overall best=524.611147; worst=530.666022)
+
+ctr=115 of 200, temp=0.629618, obj=524.809821 (overall best=524.611147; worst=528.075010)
+
+ctr=116 of 200, temp=0.623322, obj=524.944237 (overall best=524.611147; worst=531.632223)
+
+ctr=117 of 200, temp=0.617089, obj=526.796605 (overall best=524.611147; worst=528.274977)
+
+ctr=118 of 200, temp=0.610918, obj=527.863768 (overall best=524.611147; worst=537.406803)
+
+ctr=119 of 200, temp=0.604809, obj=529.997380 (overall best=524.611147; worst=537.322597)
+
+ctr=120 of 200, temp=0.598761, obj=524.809821 (overall best=524.611147; worst=532.377349)
+
+ctr=121 of 200, temp=0.592773, obj=527.949499 (overall best=524.611147; worst=533.122975)
+
+ctr=122 of 200, temp=0.586845, obj=526.288202 (overall best=524.611147; worst=529.716954)
+
+ctr=123 of 200, temp=0.580977, obj=524.611147 (overall best=524.611147; worst=526.603248)
+
+ctr=124 of 200, temp=0.575167, obj=525.948610 (overall best=524.611147; worst=528.756599)
+
+ctr=125 of 200, temp=0.569416, obj=525.493897 (overall best=524.611147; worst=527.980737)
+
+ctr=126 of 200, temp=0.563721, obj=524.944237 (overall best=524.611147; worst=529.374581)
+
+ctr=127 of 200, temp=0.558084, obj=525.948610 (overall best=524.611147; worst=526.813983)
+
+ctr=128 of 200, temp=0.552503, obj=526.217325 (overall best=524.611147; worst=529.274521)
+
+ctr=129 of 200, temp=0.546978, obj=524.944237 (overall best=524.611147; worst=528.603915)
+
+ctr=130 of 200, temp=0.541509, obj=526.409149 (overall best=524.611147; worst=529.109737)
+
+ctr=131 of 200, temp=0.536093, obj=526.742915 (overall best=524.611147; worst=528.520491)
+
+ctr=132 of 200, temp=0.530732, obj=525.422830 (overall best=524.611147; worst=527.849884)
+
+ctr=133 of 200, temp=0.525425, obj=525.948610 (overall best=524.611147; worst=527.126378)
+
+ctr=134 of 200, temp=0.520171, obj=525.948610 (overall best=524.611147; worst=530.746092)
+
+ctr=135 of 200, temp=0.514969, obj=527.821044 (overall best=524.611147; worst=531.440022)
+
+ctr=136 of 200, temp=0.509820, obj=524.944237 (overall best=524.611147; worst=529.690790)
+
+ctr=137 of 200, temp=0.504721, obj=527.589079 (overall best=524.611147; worst=531.918822)
+
+ctr=138 of 200, temp=0.499674, obj=527.055579 (overall best=524.611147; worst=527.728079)
+
+ctr=139 of 200, temp=0.494677, obj=524.944237 (overall best=524.611147; worst=529.314796)
+
+ctr=140 of 200, temp=0.489731, obj=525.931232 (overall best=524.611147; worst=528.576245)
+
+ctr=141 of 200, temp=0.484833, obj=524.926859 (overall best=524.611147; worst=527.637740)
+
+ctr=142 of 200, temp=0.479985, obj=526.585871 (overall best=524.611147; worst=526.813983)
+
+ctr=143 of 200, temp=0.475185, obj=525.738542 (overall best=524.611147; worst=527.655118)
+
+ctr=144 of 200, temp=0.470433, obj=524.611147 (overall best=524.611147; worst=526.813983)
+
+ctr=145 of 200, temp=0.465729, obj=527.637740 (overall best=524.611147; worst=527.637740)
+
+ctr=146 of 200, temp=0.461072, obj=525.476519 (overall best=524.611147; worst=528.992587)
+
+ctr=147 of 200, temp=0.456461, obj=525.948610 (overall best=524.611147; worst=526.288202)
+
+ctr=148 of 200, temp=0.451896, obj=526.217325 (overall best=524.611147; worst=531.440022)
+
+ctr=149 of 200, temp=0.447377, obj=525.901613 (overall best=524.611147; worst=528.898754)
+
+ctr=150 of 200, temp=0.442904, obj=524.611147 (overall best=524.611147; worst=527.221698)
+
+ctr=151 of 200, temp=0.438475, obj=525.948610 (overall best=524.611147; worst=527.751218)
+
+ctr=152 of 200, temp=0.434090, obj=525.792232 (overall best=524.611147; worst=528.493920)
+
+ctr=153 of 200, temp=0.429749, obj=525.738542 (overall best=524.611147; worst=530.151328)
+
+ctr=154 of 200, temp=0.425451, obj=527.463294 (overall best=524.611147; worst=528.547610)
+
+ctr=155 of 200, temp=0.421197, obj=524.628524 (overall best=524.611147; worst=528.503113)
+
+ctr=156 of 200, temp=0.416985, obj=525.422830 (overall best=524.611147; worst=526.532181)
+
+ctr=157 of 200, temp=0.412815, obj=525.720498 (overall best=524.611147; worst=526.603248)
+
+ctr=158 of 200, temp=0.408687, obj=524.944237 (overall best=524.611147; worst=527.055579)
+
+ctr=159 of 200, temp=0.404600, obj=524.944237 (overall best=524.611147; worst=527.571701)
+
+ctr=160 of 200, temp=0.400554, obj=524.944237 (overall best=524.611147; worst=527.518011)
+
+ctr=161 of 200, temp=0.396549, obj=525.792232 (overall best=524.611147; worst=527.809610)
+
+ctr=162 of 200, temp=0.392583, obj=524.611147 (overall best=524.611147; worst=525.948610)
+
+ctr=163 of 200, temp=0.388657, obj=526.926859 (overall best=524.611147; worst=527.682237)
+
+ctr=164 of 200, temp=0.384771, obj=524.611147 (overall best=524.611147; worst=527.809610)
+
+ctr=165 of 200, temp=0.380923, obj=524.611147 (overall best=524.611147; worst=525.948610)
+
+ctr=166 of 200, temp=0.377114, obj=525.931232 (overall best=524.611147; worst=526.603248)
+
+ctr=167 of 200, temp=0.373343, obj=525.720498 (overall best=524.611147; worst=525.948610)
+
+ctr=168 of 200, temp=0.369609, obj=525.737875 (overall best=524.611147; worst=527.397553)
+
+ctr=169 of 200, temp=0.365913, obj=525.948610 (overall best=524.611147; worst=525.948610)
+
+ctr=170 of 200, temp=0.362254, obj=524.944237 (overall best=524.611147; worst=526.409149)
+
+ctr=171 of 200, temp=0.358631, obj=525.948610 (overall best=524.611147; worst=526.796605)
+
+ctr=172 of 200, temp=0.355045, obj=526.190206 (overall best=524.611147; worst=526.409149)
+
+ctr=173 of 200, temp=0.351495, obj=528.195452 (overall best=524.611147; worst=530.357479)
+
+ctr=174 of 200, temp=0.347980, obj=524.944237 (overall best=524.611147; worst=528.195452)
+
+ctr=175 of 200, temp=0.344500, obj=524.944237 (overall best=524.611147; worst=524.944237)
+
+ctr=176 of 200, temp=0.341055, obj=524.944237 (overall best=524.611147; worst=527.082698)
+
+ctr=177 of 200, temp=0.337644, obj=524.944237 (overall best=524.611147; worst=527.029008)
+
+ctr=178 of 200, temp=0.334268, obj=524.944237 (overall best=524.611147; worst=526.409149)
+
+ctr=179 of 200, temp=0.330925, obj=525.809610 (overall best=524.611147; worst=526.603915)
+
+ctr=180 of 200, temp=0.327616, obj=525.809610 (overall best=524.611147; worst=527.203454)
+
+ctr=181 of 200, temp=0.324340, obj=526.190206 (overall best=524.611147; worst=526.190206)
+
+ctr=182 of 200, temp=0.321096, obj=524.944237 (overall best=524.611147; worst=526.190206)
+
+ctr=183 of 200, temp=0.317885, obj=524.944237 (overall best=524.611147; worst=527.038201)
+
+ctr=184 of 200, temp=0.314707, obj=524.944237 (overall best=524.611147; worst=527.274521)
+
+ctr=185 of 200, temp=0.311559, obj=524.628524 (overall best=524.611147; worst=525.948610)
+
+ctr=186 of 200, temp=0.308444, obj=524.628524 (overall best=524.611147; worst=525.476519)
+
+ctr=187 of 200, temp=0.305359, obj=525.737875 (overall best=524.611147; worst=525.948610)
+
+ctr=188 of 200, temp=0.302306, obj=525.422830 (overall best=524.611147; worst=527.010964)
+
+ctr=189 of 200, temp=0.299283, obj=524.611147 (overall best=524.611147; worst=525.493897)
+
+ctr=190 of 200, temp=0.296290, obj=525.422830 (overall best=524.611147; worst=525.493897)
+
+ctr=191 of 200, temp=0.293327, obj=524.628524 (overall best=524.611147; worst=526.288202)
+
+ctr=192 of 200, temp=0.290394, obj=525.422830 (overall best=524.611147; worst=525.422830)
+
+ctr=193 of 200, temp=0.287490, obj=524.611147 (overall best=524.611147; worst=525.476519)
+
+ctr=194 of 200, temp=0.284615, obj=524.611147 (overall best=524.611147; worst=525.476519)
+
+ctr=195 of 200, temp=0.281769, obj=525.476519 (overall best=524.611147; worst=525.476519)
+
+ctr=196 of 200, temp=0.278951, obj=524.611147 (overall best=524.611147; worst=525.476519)
+
+ctr=197 of 200, temp=0.276162, obj=524.628524 (overall best=524.611147; worst=526.288202)
+
+ctr=198 of 200, temp=0.273400, obj=524.628524 (overall best=524.611147; worst=525.493897)
+
+ctr=199 of 200, temp=0.270666, obj=525.948610 (overall best=524.611147; worst=525.948610)
+Improved solution: 524.611147
+Solution before cleaning individual routes: 524.611
+Solution after cleaning individual routes: 524.611
+
+------------------------------------------------
+Solution for problem Christofides-1
+Total route length:       524.61
+Best known solution:      524.61
+Total service time:        0.00
+Vehicle max route length: N/A
+Vehicle capacity:         160
+Number of nodes visited:  50
+------------------------------------------------
+
+Route 001[0-006...027-0	len=98.45	load=0152	#=009]
+Route 002[0-008...032-0	len=118.52	load=0149	#=011]
+Route 003[0-011...038-0	len=99.33	load=0159	#=010]
+Route 004[0-012...046-0	len=99.25	load=0160	#=011]
+Route 005[0-018...047-0	len=109.06	load=0157	#=009]
+
+                       (Moves,      Evaluations)
+     One Point Move:   (0000010254, 0002769525)
+     Two Point Move:   (0000005557, 0002802515)
+   Three Point Move:   (0000000000, 0000000000)
+       Two-opt Move:   (0000016541, 0011027345)
+     Three-opt Move:   (0000000000, 0000000192)
+        Or-opt Move:   (0000000000, 0000000000)
+Cross-Exchange Move:   (0000000000, 0000000000)
+
+5 524.611  5.71 1.000
+--------------------------------------------
+VRPH, version 1.0
+Copyright 2010 Chris Groer
+Distributed under Common Public License 1.0
+--------------------------------------------
+
+Finding initial solution using Sweep algorithm
+
+------------------------------------------------
+Solution for problem Christofides-1
+Total route length:       758.95
+Best known solution:      524.61
+Total service time:        0.00
+Vehicle max route length: N/A
+Vehicle capacity:         160
+Number of nodes visited:  50
+------------------------------------------------
+
+Route 001[0-007...023-0	len=114.77	load=0120	#=007]
+Route 002[0-018...041-0	len=137.30	load=0157	#=009]
+Route 003[0-020...035-0	len=78.93	load=0045	#=002]
+Route 004[0-030...038-0	len=119.78	load=0159	#=010]
+Route 005[0-036...032-0	len=146.93	load=0136	#=011]
+Route 006[0-044...012-0	len=161.24	load=0160	#=011]
+

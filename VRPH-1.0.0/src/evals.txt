@@ -1,0 +1,120 @@
+Concatenate.cpp:bool Concatenate::evaluate(VRP *V, int i_route, int j_route, int rules, VRPMove *M)
+Concatenate.cpp:    // First, evaluate the move
+Concatenate.cpp:    if(evaluate(V,i_route,j_route, rules, &M)==false)
+Binary file Concatenate.o matches
+CrossExchange.cpp:                    // Now evaluate the cross exchange move involving
+CrossExchange.cpp:                    if(this->evaluate(V,i1,i2,k1,k2,j1,j2,l1,l2,rules,&M) == true)
+CrossExchange.cpp:            report_error("%s: best move evaluates to false\n");
+CrossExchange.cpp:bool CrossExchange::evaluate(class VRP *V, int i1, int i2, int k1, int k2, int j1, int j2, int l1, int l2,
+CrossExchange.cpp:    M->evaluated_savings=false;
+Binary file CrossExchange.o matches
+Flip.cpp:bool Flip::evaluate(class VRP *V, int start_point, int end_point, VRPMove *M)
+Flip.cpp:    // evaluate the move
+Flip.cpp:    if(evaluate(V,start_point,end_point, &M)==false)
+Binary file Flip.o matches
+MoveString.cpp:bool MoveString::evaluate(VRP *V, int a, int b, int u, int v, VRPMove *M)
+MoveString.cpp:        report_error("%s: evaluate called with u or v as VRPH_DEPOT or u==v\n",__FUNCTION__);
+MoveString.cpp:    if(evaluate(V,a,b,u,v, &M)==false)
+MoveString.cpp:        report_error("%s: evaluate is false in MoveString.move\n",__FUNCTION__);
+Binary file MoveString.o matches
+OnePointMove.cpp:        if(evaluate(V,j,k,rules,&M)==true)
+OnePointMove.cpp:            if(evaluate(V,j,k,rules,&M)==true)
+OnePointMove.cpp:bool OnePointMove::evaluate(class VRP *V, int j, int b, int rules, VRPMove *M)
+OnePointMove.cpp:    /// This function evaluates the move of inserting j either before or after node b
+OnePointMove.cpp:    M->evaluated_savings=false;
+OnePointMove.cpp:                if( (presert.evaluate(V,j,t,&CurrentM)==true)&&(V->check_move(&CurrentM,rules)==true) && allowed )
+OnePointMove.cpp:                if( (postsert.evaluate(V,j,t,&CurrentM)==true)&&(V->check_move(&CurrentM,rules)==true) && allowed )
+OnePointMove.cpp:        if( (presert.evaluate(V,j,b,M)==true)&&(V->check_move(M,rules)==true) )
+OnePointMove.cpp:        if( (postsert.evaluate(V,j,b,M)==true)&&(V->check_move(M,rules)==true) )
+OnePointMove.cpp:    if( savings1 <= savings2 &&  (presert.evaluate(V,j,b,M)==true)
+OnePointMove.cpp:    if( savings2<savings1 && postsert.evaluate(V,j,b,M)==true &&
+OnePointMove.cpp:    if( (presert.evaluate(V,j,b,M)==true)&&(V->check_move(M,rules)==true))
+Binary file OnePointMove.o matches
+OrOpt.cpp:                if(evaluate(V,a,len,c,d,rules, &M)==true)
+OrOpt.cpp:            if(evaluate(V,j,len,c,d,rules, &M)==true)
+OrOpt.cpp:bool OrOpt::evaluate(class VRP *V, int a, int len, int c, int d, int rules, VRPMove *M)
+OrOpt.cpp:    M->evaluated_savings=false;
+OrOpt.cpp:    // Now just use MoveString to evaluate
+OrOpt.cpp:    if(MS.evaluate(V,c,d,a,string_end, M)==true) 
+Binary file OrOpt.o matches
+Postsert.cpp:bool Postsert::evaluate(class VRP *V, int u, int i, VRPMove *M)
+Postsert.cpp:    // First, evaluate the move
+Postsert.cpp:    if(evaluate(V,u,i, &M)==false)
+Binary file Postsert.o matches
+Presert.cpp:bool Presert::evaluate(class VRP *V, int u, int i, VRPMove *M)
+Presert.cpp:    /// This function evaluates the move where we
+Presert.cpp:    if(evaluate(V,u,i, &M)==false)
+Binary file Presert.o matches
+Swap.cpp:bool Swap::evaluate(class VRP *V, int u, int i, VRPMove *M)
+Swap.cpp:    if(evaluate(V,u,i,&M)==false)
+Swap.cpp:        report_error("%s: evaluate is false in move!\n",__FUNCTION__);
+Swap.cpp:            report_error("%s: postsert evaluates to false\n",__FUNCTION__);
+Binary file Swap.o matches
+SwapEnds.cpp:bool SwapEnds::evaluate(class VRP *V, int a, int v, VRPMove *M)
+SwapEnds.cpp:    /// and evaluates the swapping of the ends of the routes following a and v respectively,
+SwapEnds.cpp:    if(evaluate(V,a,v,&M)==false)
+Binary file SwapEnds.o matches
+Sweep.cpp:        post=postsert.evaluate(V,T[(pos+1)%n].k, T[pos%n].k, &M1);
+Sweep.cpp:        pre=presert.evaluate(V,T[(pos+1)%n].k, T[pos%n].k, &M2);
+Binary file Sweep.o matches
+ThreeOpt.cpp:    if(evaluate(V,a,b,c,d,e,f,rules,&M)==true)
+ThreeOpt.cpp:                if(evaluate(V,a,b,c,d,e,f,rules,&M)==true)
+ThreeOpt.cpp:            report_error("%s: best move evaluates to false\n",__FUNCTION__);
+ThreeOpt.cpp:bool ThreeOpt::evaluate(class VRP *V, int a, int b, int c, int d, int e, int f,
+ThreeOpt.cpp:    M->evaluated_savings=false;
+Binary file ThreeOpt.o matches
+ThreePointMove.cpp:            if(evaluate(V,b,i,j,rules,&M)==true)
+ThreePointMove.cpp:            if(evaluate(V,b,h,i,rules,&M)==true)
+ThreePointMove.cpp:            report_error("%s: best move evaluates to false\n",__FUNCTION__);
+ThreePointMove.cpp:            if(evaluate(V,l,j,k,rules,&M)==true)
+ThreePointMove.cpp:            if(evaluate(V,j,l,m,rules,&M)==true)
+ThreePointMove.cpp:bool ThreePointMove::evaluate(VRP *V, int b, int i, int j, int rules, VRPMove *M)
+ThreePointMove.cpp:    M->evaluated_savings=false;
+Binary file ThreePointMove.o matches
+TwoOpt.cpp:            // Now evaluate the 4 moves
+TwoOpt.cpp:            if(evaluate(V,a,b,i,j,rules, &M)==true)
+TwoOpt.cpp:            if(evaluate(V,a,b,j,k,rules, &M)==true)
+TwoOpt.cpp:            if(evaluate(V,b,c,i,j,rules, &M)==true)
+TwoOpt.cpp:            if(evaluate(V,b,c,j,k,rules, &M)==true)
+TwoOpt.cpp:                if(evaluate(V,a,b,VRPH_DEPOT,t,rules, &M)==true)
+TwoOpt.cpp:                if(evaluate(V,b,c,VRPH_DEPOT,t,rules, &M)==true)
+TwoOpt.cpp:                if(evaluate(V,a,b,t,VRPH_DEPOT,rules, &M)==true)
+TwoOpt.cpp:                if(evaluate(V,b,c,t,VRPH_DEPOT,rules, &M)==true)
+TwoOpt.cpp:            report_error("%s: best move evaluates to false\n",__FUNCTION__);
+TwoOpt.cpp:            if(evaluate(V,a,b,i,j,rules, &M)==true)
+TwoOpt.cpp:bool TwoOpt::evaluate(class VRP *V, int a, int b, int c, int d, int rules, VRPMove *M)
+TwoOpt.cpp:    M->evaluated_savings=false;
+TwoOpt.cpp:    M->evaluated_savings=false;
+TwoOpt.cpp:                if( (flip.evaluate(V,a,d,M)==true)&&(V->check_move(M, rules)==true))
+TwoOpt.cpp:                if( (flip.evaluate(V,c,b,M)==true) &&(V->check_move(M, rules)==true))
+TwoOpt.cpp:                // Put a dummy node between a and b and evaluate
+TwoOpt.cpp:                if( (flip.evaluate(V,dummy,d,M)==true)&&(V->check_move(M, rules)==true))
+TwoOpt.cpp:                if( (flip.evaluate(V,c,dummy,M)==true)&&(V->check_move(M, rules)==true))
+TwoOpt.cpp:                if( (flip.evaluate(V,dummy,b,M)==true)&&(V->check_move(M, rules)==true))
+TwoOpt.cpp:                if( (flip.evaluate(V,a,dummy,M)==true)&&(V->check_move(M, rules)==true))
+TwoOpt.cpp:        if( (swap_ends.evaluate(V,a,c,M)==true)&&(V->check_move(M, rules)==true))
+TwoOpt.cpp:        if( (swap_ends.evaluate(V,dummy,c,M)==true)&&(V->check_move(M, rules)==true))
+TwoOpt.cpp:        if( (swap_ends.evaluate(V,a,c,M)==true)&&(V->check_move(M, rules)==true))
+TwoOpt.cpp:        if( (swap_ends.evaluate(V,dummy,a,M)==true)&&(V->check_move(M, rules)==true))
+TwoOpt.cpp:        if( (swap_ends.evaluate(V,c,a,M)==true)&&(V->check_move(M, rules)==true))
+Binary file TwoOpt.o matches
+TwoPointMove.cpp:            if(evaluate(V,j,k,rules,&M)==true)
+TwoPointMove.cpp:            if(evaluate(V,j,k,rules,&M)==true)
+TwoPointMove.cpp:bool TwoPointMove::evaluate(class VRP *V, int j, int b, int rules, VRPMove *M)
+TwoPointMove.cpp:    /// This function evaluates the move of swapping the positions of j 
+TwoPointMove.cpp:    M->evaluated_savings=false;// false until we check
+TwoPointMove.cpp:        report_error("%s: evaluate() called with bad arguments??\n",__FUNCTION__);
+TwoPointMove.cpp:    if( (swap.evaluate(V,j,b,M)==true) && (V->check_move(M, rules)==true))
+TwoPointMove.cpp:        report_error("%s: TPM::swap.move evaluates to false!!\n",__FUNCTION__);
+Binary file TwoPointMove.o matches
+VRP.cpp:                    if(Postsert.evaluate(this,k,a,&M)==true && M.savings<best_savings)
+VRP.cpp:                    if(Presert.evaluate(this,k,b,&M)==true && M.savings<best_savings)
+VRP.cpp:                    if(Postsert.evaluate(this,k,b,&M)==true && M.savings<best_savings)
+VRP.cpp:                    if(Presert.evaluate(this,k,c,&M)==true && M.savings<best_savings)
+VRP.cpp:        if(M->evaluated_savings==true)
+VRP.cpp:                if(presert.evaluate(this,k,m,&M)==true)
+VRP.cpp:                if(postsert.evaluate(this,k,l,&M)==true)
+VRP.cpp:                if(presert.evaluate(this,k,m,&M)==true)
+Binary file VRP.o matches
+VRPMove.cpp:    this->evaluated_savings=false;
+VRPMove.cpp:    this->evaluated_savings=false;
