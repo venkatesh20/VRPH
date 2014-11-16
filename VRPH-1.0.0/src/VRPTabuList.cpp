@@ -11,6 +11,12 @@
 ////////////////////////////////////////////////////////////
 
 #include "VRPH.h"
+#include "omp.h"
+
+#define OPENMP_BIND_PROC TRUE
+#define OPENMP_DYNAMIC TRUE
+#define OPENMP_NESTED TRUE
+#define CHUNKSIZE 100
 
 VRPTabuList::VRPTabuList()
 {
@@ -42,12 +48,15 @@ VRPTabuList::VRPTabuList(int t)
     this->hash_vals2=new int[t];
 
     int i;
+	int chunk = CHUNKSIZE;
+#pragma omp parallel for \
+   private(i) \
+   schedule(static,chunk)
     for(i=0;i<this->max_entries;i++)
     {
         this->hash_vals1[i]=-1;
         this->hash_vals2[i]=-1;
     }
-    
 
 }
 
@@ -120,6 +129,10 @@ void VRPTabuList::empty()
     printf("Emptying tabu list -  max_entries is %d\n", this->max_entries);
 #endif
     int i;
+	int chunk = CHUNKSIZE;
+#pragma omp parallel for \
+   private(i) \
+   schedule(static,chunk)
     for(i=0;i<this->max_entries;i++)
     {
         this->hash_vals1[i]=-1;
@@ -144,7 +157,12 @@ void VRPTabuList::show()
     printf("Tabu List currently has %d entries starting at %d (max is %d)\n",
         this->num_entries,this->start_index, this->max_entries);
 
-    for(int i=0;i<this->num_entries;i++)
+	int i=0;
+	int chunk = CHUNKSIZE;
+#pragma omp parallel for \
+   private(i) \
+   schedule(static,chunk)
+    for(i=0;i<this->num_entries;i++)
     {
         printf("Tabu entry %d: (%d,%d)\n",((start_index+i)%this->max_entries),
             this->hash_vals1[((start_index+i)%this->max_entries)],

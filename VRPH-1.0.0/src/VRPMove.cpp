@@ -11,6 +11,12 @@
 ////////////////////////////////////////////////////////////
 
 #include "VRPH.h"
+#include "omp.h"
+
+#define OPENMP_BIND_PROC TRUE
+#define OPENMP_DYNAMIC TRUE
+#define OPENMP_NESTED TRUE
+#define CHUNKSIZE 100
 
 VRPMove::VRPMove()
 {
@@ -102,12 +108,20 @@ bool VRPMove::is_better(VRP *V, VRPMove *M2, int rules)
         int i,sq, sq2;
 
         sq=0; sq2=0;
+		int chunk = CHUNKSIZE;
+#pragma omp parallel shared(chunk) private(i)
+{
+	#pragma omp sections nowait
+	{
+		#pragma omp section
         for(i=0;i<this->num_affected_routes;i++)
             sq+= (this->route_custs[i])*(this->route_custs[i]);
-
+			
+		#pragma omp section
         for(i=0;i<M2->num_affected_routes;i++)
             sq2+= (M2->route_custs[i])*(M2->route_custs[i]);
-
+	}
+}
         if(sq>sq2)
             // this move is better
             return true;
