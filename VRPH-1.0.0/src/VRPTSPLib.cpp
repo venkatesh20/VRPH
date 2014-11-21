@@ -66,6 +66,10 @@ int VRPGetDimension(char *filename)
     int i,n;
 
     n=-1;
+	int chunk = CHUNKSIZE;
+#pragma omp parallel for \
+   private(i) \
+   schedule(dynamic,chunk)
     for(i=0;i<VRPH_STRING_SIZE;i++)
         str1[i]=0;
 
@@ -136,6 +140,10 @@ int VRPGetNumDays(char *filename)
     int i,n;
 
     n=-1;
+	int chunk = CHUNKSIZE;
+#pragma omp parallel for \
+   private(i) \
+   schedule(dynamic,chunk)
     for(i=0;i<VRPH_STRING_SIZE;i++)
         str1[i]=0;
 
@@ -183,25 +191,32 @@ int VRPCheckTSPLIBString(char *s)
     fprintf(stderr,"Checking string %s\n",s);
 #endif
 
+ int returncode=0;
+ int chunk = CHUNKSIZE;
+#pragma omp parallel for private(i) schedule(dynamic,chunk)
     for(i=0;i<NumSupportedTSPLIBStrings;i++)
     {
-        if(strncmp((const char *)s, SupportedTSPLIBStrings[i],SL[i])==0)
-            return i+1;
+        if((returncode == 0) & (strncmp((const char *)s, SupportedTSPLIBStrings[i],SL[i])==0))
+            returncode = i+1;
+	    #pragma omp flush (returncode)
     }
-
-#if TSPLIB_DEBUG
-    fprintf(stderr,"Didn't find string %s in supported list\n",s);
-#endif
+    
+    if (returncode > 0)
+    	return returncode;
 
     // Didn't find a supported string - check for other known 
     // unsupported strings
-
-
+    
+#pragma omp parallel for private(i) schedule(dynamic,chunk)
     for(i=0;i<NumUnsupportedTSPLIBStrings;i++)
     {
-        if(strcmp((const char *)s, UnsupportedTSPLIBStrings[i])==0)
-            return -(i+1);
+        if((returncode == 0) & (strcmp((const char *)s, UnsupportedTSPLIBStrings[i])==0))
+            returncode = -(i+1);
+	    #pragma omp flush (returncode)
     }
+    
+    if (returncode < 0)
+    	return returncode;
 
     // Unknown string encountered
     fprintf(stderr,"Unknown string %s encountered\n", s);

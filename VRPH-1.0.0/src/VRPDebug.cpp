@@ -23,6 +23,8 @@ void VRP::show_next_array()
     n= num_original_nodes;
 
     printf("Next Array:\n");
+	int chunk = CHUNKSIZE;
+#pragma omp parallel for private(i) schedule(dynamic,chunk)
     for(i=0;i<=n;i++)
         printf("%03d -> %03d\n",i,next_array[i]);
 
@@ -39,7 +41,8 @@ void VRP::show_pred_array()
 
     n= num_original_nodes;
     printf("Pred Array:\n");
-
+	int chunk = CHUNKSIZE;
+#pragma omp parallel for private(i) schedule(dynamic,chunk)
     for(i=0;i<=n;i++)
         printf("%03d -> %03d\n",i,pred_array[i]);
 

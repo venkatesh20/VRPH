@@ -23,7 +23,8 @@ VRPNode::VRPNode()
 
     x = 0;
     y = 0;
-    
+    int chunk = CHUNKSIZE;
+    #pragma omp parallel for shared(chunk) private(i) schedule(dynamic,chunk)
     for(i = 0;i < MAX_NEIGHBORLIST_SIZE; i++)
     {
         this->neighbor_list[i].position = 0;

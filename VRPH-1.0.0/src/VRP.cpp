@@ -1971,8 +1971,6 @@ bool VRP::is_feasible(VRPMove *M, int rules)
    #pragma omp parallel for schedule(runtime) private(i)
     for(i=0;i<M->num_affected_routes;i++)
     {
-        flag=((M->route_lens[i]>this->max_route_length) || (M->route_loads[i]>this->max_veh_capacity));
-        #pragma omp flush (flag)
         if (flag) {
         if( (M->route_lens[i]>this->max_route_length) || (M->route_loads[i]>this->max_veh_capacity) ) {
             flag=false;
