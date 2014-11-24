@@ -60,7 +60,7 @@ bool ThreePointMove::search(VRP *V, int b, int rules)
         old_sol=new int[V->num_original_nodes+2];
         V->export_solution_buff(old_sol);
     }
-        
+//cant parallelize since it might affect solution (multiple nodes getting exchanged at once)      
     for(ii=0;ii<V->search_size;ii++)
     {
         // Get the edge i-j

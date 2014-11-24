@@ -76,6 +76,10 @@ double VRP::RTR_solve(int heuristics, int intensity, int max_stuck, int max_pert
 
 
     j=VRPH_ABS(this->next_array[VRPH_DEPOT]);
+
+    //parallelize this
+	int chunk = CHUNKSIZE;
+    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
     for(i=0;i<this->num_nodes;i++)
     {
         perm[i]=j;
@@ -116,7 +120,10 @@ uphill:
     if(verbose)
         printf("Uphill starting at %5.2f\n",this->total_route_length);
     
-    for(int k=1;k<intensity;k++)
+    //parallelize possibly
+	int k = 1;
+    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(k,i)
+    for(k=1;k<intensity;k++)
     {
         start_val=total_route_length;
 
@@ -149,22 +156,32 @@ uphill:
             if(random)
                 random_permutation(perm, this->num_nodes);
 
-            for(i=1;i<=n;i++)    
+	    //parallelize this
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
+            for(i=1;i<=n;i++)
+		#pragma omp critical
+		{    
                 TPM.search(this,perm[i-1],rules + VRPH_INTER_ROUTE_ONLY);
-
+		}
             //check_fixed_edges("After 2PM\n");
 
         }
 
 
+
+//started mass parallelization here
+
         if(heuristics & THREE_POINT_MOVE)
         {
             if(random)
                 random_permutation(perm, this->num_nodes);
-
-            for(i=1;i<=n;i++)    
+	    //parallelize this
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
+            for(i=1;i<=n;i++)
+		#pragma omp critical
+		{    
                 ThreePM.search(this,perm[i-1],rules + VRPH_INTER_ROUTE_ONLY);
-
+		}
             //check_fixed_edges("After 3PM\n");
 
         }
@@ -175,10 +192,13 @@ uphill:
         {
             if(random)
                 random_permutation(perm, this->num_nodes);
-
+            //parallelize this
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1;i<=n;i++)    
+		#pragma omp critical
+		{
                 TO.search(this,perm[i-1],rules);
-
+		}
             //check_fixed_edges("After TO\n");
 
 
@@ -189,16 +209,24 @@ uphill:
         {
             if(random)
                 random_permutation(perm, this->num_nodes);
-
-            for(i=1;i<=n;i++)    
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
+            for(i=1;i<=n;i++)
+		#pragma omp critical
+		{  
                 OR.search(this,perm[i-1],4,rules);
-
+		}
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1;i<=n;i++)    
+		#pragma omp critical
+		{
                 OR.search(this,perm[i-1],3,rules);
-
+		}
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1;i<=n;i++)    
+		#pragma omp critical
+		{
                 OR.search(this,perm[i-1],2,rules);
-
+		}
             //check_fixed_edges("After OR\n");
 
         }
@@ -207,7 +235,7 @@ uphill:
         {
             normalize_route_numbers();
             R=total_number_of_routes;
-
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1; i<=R; i++)    
                 ThreeO.route_search(this,i,rules-neighbor_list);
 
@@ -220,7 +248,7 @@ uphill:
             normalize_route_numbers();
             this->find_neighboring_routes();
             R=total_number_of_routes;
-
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i,j)
             for(i=1; i<=R-1; i++)    
             {
                 for(j=0;j<1;j++)
@@ -270,10 +298,12 @@ downhill:
 
             if(random)
                 random_permutation(perm, this->num_nodes);
-
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1;i<=n;i++)
+		#pragma omp critical
+		{
                 OPM.search(this,perm[i-1],rules );
-
+		}
 
             if(VRPH_ABS(total_route_length-start_val)<VRPH_EPSILON)
                 break; 
@@ -294,10 +324,12 @@ downhill:
 
             if(random)
                 random_permutation(perm, this->num_nodes);
-
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1;i<=n;i++)    
+		#pragma omp critical
+		{
                 TPM.search(this,perm[i-1],rules);
-
+		}
             if(VRPH_ABS(total_route_length-start_val)<VRPH_EPSILON)
                 break; 
 
@@ -318,10 +350,12 @@ downhill:
 
             if(random)
                 random_permutation(perm, this->num_nodes);
-
-            for(i=1;i<=n;i++)    
+	     # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
+            for(i=1;i<=n;i++)
+		#pragma omp critical
+		{    
                 TO.search(this,perm[i-1],rules);
-
+		}
             if(VRPH_ABS(total_route_length-start_val)<VRPH_EPSILON)
                 break; 
         }
@@ -337,8 +371,12 @@ downhill:
             if(random)
                 random_permutation(perm, this->num_nodes);
 
-            for(i=1;i<=n;i++)    
+	     # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
+            for(i=1;i<=n;i++)
+		#pragma omp critical
+		{    
                 TO.search(this,perm[i-1],rules);
+		}
 
             if(VRPH_ABS(total_route_length-start_val)<VRPH_EPSILON)
                 break; 
@@ -356,9 +394,12 @@ downhill:
             if(random)
                 random_permutation(perm, this->num_nodes);
 
+	     # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1;i<=n;i++)    
+		#pragma omp critical
+		{ 
                 ThreePM.search(this,perm[i-1],rules);
-
+		}
             if(VRPH_ABS(total_route_length-start_val)<VRPH_EPSILON)
                 break; 
 
@@ -378,13 +419,24 @@ downhill:
             if(random)
                 random_permutation(perm, this->num_nodes);
 
-            for(i=1;i<=n;i++)    
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
+            for(i=1;i<=n;i++)   
+		#pragma omp critical
+		{  
                 OR.search(this,perm[i-1],4,rules);
+		}
+            # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1;i<=n;i++)
+		#pragma omp critical
+		{ 
                 OR.search(this,perm[i-1],3,rules);
+		}
+	    # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1;i<=n;i++)
+		#pragma omp critical
+		{ 
                 OR.search(this,perm[i-1],2,rules);
-
+		}
 
             if(VRPH_ABS(total_route_length-start_val)<VRPH_EPSILON)
                 break; 
@@ -400,7 +452,7 @@ downhill:
         {
             // 3OPT
             start_val=total_route_length;
-
+	     # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i)
             for(i=1;i<=R;i++)    
                 ThreeO.route_search(this,i,rules);
 
@@ -417,7 +469,7 @@ downhill:
         R=total_number_of_routes;
 
         rules=VRPH_DOWNHILL+objective+VRPH_INTRA_ROUTE_ONLY+ random +fixed + accept_type;
-
+	 # pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(i,j)
         for(i=1; i<=R-1; i++)    
         {
             for(j=0;j<=1;j++)
@@ -531,6 +583,8 @@ double VRP::SA_solve(int heuristics, double start_temp, double cool_ratio,
     int *perm;
     perm=new int[this->num_nodes];
     j=VRPH_ABS(this->next_array[VRPH_DEPOT]);
+	int chunk = CHUNKSIZE;
+     # pragma omp parallel for schedule(dynamic,chunk) shared(chunk,j) private(i)
     for(i=0;i<this->num_nodes;i++)
     {
         perm[i]=j;
@@ -572,6 +626,7 @@ double VRP::SA_solve(int heuristics, double start_temp, double cool_ratio,
     rules=VRPH_USE_NEIGHBOR_LIST+VRPH_FIRST_ACCEPT+VRPH_SIMULATED_ANNEALING+VRPH_SAVINGS_ONLY;
 
     double worst_obj=0;
+    
     for(ctr=0;ctr<num_loops;ctr++)
     {
         if(verbose)
@@ -586,9 +641,10 @@ double VRP::SA_solve(int heuristics, double start_temp, double cool_ratio,
 
         // Cool it...
         this->temperature = this->cooling_ratio * this->temperature;
-
-
-        for(int k=0; k < iters_per_loop; k++)
+	int k = 0;
+	int chunk = CHUNKSIZE;
+	# pragma omp parallel for schedule(dynamic,chunk) shared(chunk) private(k,i,j)
+        for(k=0; k < iters_per_loop; k++)
         {
             start_val=total_route_length;
             if(heuristics & THREE_OPT)
@@ -629,12 +685,15 @@ double VRP::SA_solve(int heuristics, double start_temp, double cool_ratio,
                 rules=VRPH_SIMULATED_ANNEALING+neighbor_list+random+fixed+objective;
                 if(random)
                     random_permutation(perm, this->num_nodes);
-
+		
                 for(i=1;i<=n;i++)    
                 {
+		    #pragma omp critical 
+		    {
                     TPM.search(this,perm[i-1],rules);
                     if(this->total_route_length > worst_obj)
                         worst_obj=this->total_route_length;
+		    }
                 }
 
 
@@ -651,9 +710,12 @@ double VRP::SA_solve(int heuristics, double start_temp, double cool_ratio,
 
                 for(i=1;i<=n;i++)    
                 {
+		    #pragma omp critical 
+		    {
                     TO.search(this,perm[i-1],rules);
                     if(this->total_route_length > worst_obj)
                         worst_obj=this->total_route_length;
+		    }
                 }
 
 
@@ -668,9 +730,12 @@ double VRP::SA_solve(int heuristics, double start_temp, double cool_ratio,
 
                 for(i=1;i<=n;i++)    
                 {
+		    #pragma omp critical 
+		    {
                     ThreePM.search(this,perm[i-1],rules);
                     if(this->total_route_length > worst_obj)
                         worst_obj=this->total_route_length;
+		    }
                 }
             }
 
@@ -680,18 +745,25 @@ double VRP::SA_solve(int heuristics, double start_temp, double cool_ratio,
                 if(random)
                     random_permutation(perm, this->num_nodes);
 
+
                 for(i=1;i<=n;i++)    
                 {
+                    #pragma omp critical 
+                    {
                     OR.search(this,perm[i-1],3,rules);
                     if(this->total_route_length > worst_obj)
                         worst_obj=this->total_route_length;
+                    }
                 }
 
                 for(i=1;i<=n;i++)    
                 {
+		    #pragma omp critical
+		    {
                     OR.search(this,perm[i-1],2,rules);
                     if(this->total_route_length > worst_obj)
                         worst_obj=this->total_route_length;
+                    }
                 }
 
 

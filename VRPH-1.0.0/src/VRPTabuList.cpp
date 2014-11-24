@@ -51,7 +51,7 @@ VRPTabuList::VRPTabuList(int t)
 	int chunk = CHUNKSIZE;
 #pragma omp parallel for \
    private(i) \
-   schedule(static,chunk)
+   schedule(dynamic,chunk)
     for(i=0;i<this->max_entries;i++)
     {
         this->hash_vals1[i]=-1;
@@ -132,7 +132,7 @@ void VRPTabuList::empty()
 	int chunk = CHUNKSIZE;
 #pragma omp parallel for \
    private(i) \
-   schedule(static,chunk)
+   schedule(dynamic,chunk)
     for(i=0;i<this->max_entries;i++)
     {
         this->hash_vals1[i]=-1;
@@ -161,7 +161,7 @@ void VRPTabuList::show()
 	int chunk = CHUNKSIZE;
 #pragma omp parallel for \
    private(i) \
-   schedule(static,chunk)
+   schedule(dynamic,chunk)
     for(i=0;i<this->num_entries;i++)
     {
         printf("Tabu entry %d: (%d,%d)\n",((start_index+i)%this->max_entries),

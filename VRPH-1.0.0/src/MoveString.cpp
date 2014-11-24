@@ -210,6 +210,9 @@ bool MoveString::move(VRP *V, int a, int b, int u, int v)
         }
 
         string[0]=u;
+#pragma omp parallel for \
+   private(i) \
+   schedule(runtime)
         for(i=1;i<len;i++)
         {
             string[i]= VRPH_MAX(V->next_array[string[i-1]],0);
@@ -224,6 +227,9 @@ bool MoveString::move(VRP *V, int a, int b, int u, int v)
         V->max_veh_capacity=VRP_INFINITY;
 
         postsert.move(V,string[0],a);
+#pragma omp parallel for \
+   private(i) \
+   schedule(runtime)
         for(i=1;i<len;i++)
         {    
             postsert.move(V,string[i],string[i-1]);
