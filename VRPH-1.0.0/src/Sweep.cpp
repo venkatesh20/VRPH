@@ -42,15 +42,22 @@ bool Sweep::Construct(class VRP *V)
     V->create_default_routes();
 
     int i,pos;
+    int chunk=CHUNKSIZE;
     int n=V->num_original_nodes;
+    omp_lock_t lck1;
+    omp_init_lock(&lck1);
 
     // Create a sorted list of nodes and thetas
     double_int *T;
     T = new double_int[n+1];
+    #pragma omp parallel for shared(chunk) private(i) schedule(dynamic, chunk)
     for(i=0;i<n;i++)
     {
+        #pragma omp critical 
+        {
         T[i].k=i+1;// k is the index
         T[i].d=V->nodes[i+1].theta;// d is theta
+        }
     }
 
     // Sort by theta
@@ -65,16 +72,19 @@ bool Sweep::Construct(class VRP *V)
     VRPMove M1, M2;
     bool post,pre;
     
-
+    #pragma omp parallel for shared(chunk, post,pre, start) private(i,pos) schedule(dynamic, chunk)
     for(i=0;i<n;i++)
     {
         pos=start+i;
 
 #if SWEEP_DEBUG
+        omp_set_lock(&lck1);
         printf("%5.2f: pos=%d:  Trying to insert %d after %d\n",V->total_route_length,
             pos%n, T[(pos+1)%n].k, T[pos%n].k);
+        omp_unset_lock(&lck1);
 #endif
- 
+       #pragma omp critical 
+     {  
         post=postsert.evaluate(V,T[(pos+1)%n].k, T[pos%n].k, &M1);
         pre=presert.evaluate(V,T[(pos+1)%n].k, T[pos%n].k, &M2);
         
@@ -104,9 +114,10 @@ bool Sweep::Construct(class VRP *V)
             // singleton routes
         
         }
+      }
     }
     
-
+    omp_destroy_lock(&lck1);
     return true;
 }
 

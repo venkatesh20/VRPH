@@ -82,8 +82,12 @@ bool VRP::plot(const char *filename, int options, int orientation)
     xmax=-VRP_INFINITY;
     ymax=-VRP_INFINITY;
 
+    int chunk=CHUNKSIZE;
+    #pragma omp parallel for shared(chunk,xmin,xmax,ymin,ymax) schedule(dynamic, chunk) private(i)
     for(i=0; i <= this->num_original_nodes; i++)
     {
+        #pragma omp critical 
+      {
         if((PLFLT)nodes[i].x<xmin)
             xmin=(PLFLT)nodes[i].x;
         if((PLFLT)nodes[i].x>xmax)
@@ -93,6 +97,7 @@ bool VRP::plot(const char *filename, int options, int orientation)
             ymin=(PLFLT)nodes[i].y;
         if((PLFLT)nodes[i].y>ymax)
             ymax=(PLFLT)nodes[i].y;
+       }
     }
 
     // Stretch the window by a factor of .05
@@ -166,6 +171,7 @@ bool VRP::plot(const char *filename, int options, int orientation)
     normalize_route_numbers();
     R= count_num_routes();
 
+    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i,ctr)
     for(i=1;i<=R;i++)
     {
         // Plot route i
@@ -210,6 +216,7 @@ bool VRP::plot(const char *filename, int options, int orientation)
         plcol0(VRPH_BLUE);
     int j=0;
     double max_ratio=-VRP_INFINITY;
+    #pragma omp parallel for shared(chunk,max_ratio,j) schedule(dynamic, chunk) private(i)
     for(i=1;i<=this->num_original_nodes;i++)
     {
         if(routed[i])
@@ -224,15 +231,19 @@ bool VRP::plot(const char *filename, int options, int orientation)
                 else
                     plssym( 0, symbol_size );
 
-                if((double)(this->nodes[i].demand)/(double)(this->max_veh_capacity) >max_ratio)
+                if((double)(this->nodes[i].demand)/(double)(this->max_veh_capacity) >max_ratio) {
+                    #pragma omp critical
                     max_ratio=(double)(this->nodes[i].demand)/(double)(this->max_veh_capacity) ;
+                }
                 plpoin(1,x+j,y+j,4);
             }
+            #pragma omp critical
             j++;
         }
     }
 
     j=0;
+    #pragma omp parallel for shared(chunk,j) schedule(dynamic, chunk) private(i)
     for(i=1;i<=this->num_original_nodes;i++)
     {
         if(!(routed[i]))
@@ -242,6 +253,7 @@ bool VRP::plot(const char *filename, int options, int orientation)
             plcol0(VRPH_RED);
             if(!(options & VRPH_NO_POINTS))
                 plpoin(1,x+j,y+j,4);
+            #pragma omp critical
             j++;
         }
     }
@@ -350,9 +362,12 @@ bool VRP::plot_route(int r, const char *filename)
     ymin=VRP_INFINITY;
     xmax=-VRP_INFINITY;
     ymax=-VRP_INFINITY;
-
+    int chunk=CHUNKSIZE;
+    #pragma omp parallel for shared(chunk,xmin,xmax,ymin,ymax) schedule(dynamic, chunk) private(i)
     for(i=0;i<= num_nodes;i++)
     {
+         #pragma omp critical 
+       {
         if((PLFLT)nodes[i].x<xmin)
             xmin=(PLFLT)nodes[i].x;
         if((PLFLT)nodes[i].x>xmax)
@@ -362,6 +377,7 @@ bool VRP::plot_route(int r, const char *filename)
             ymin=(PLFLT)nodes[i].y;
         if((PLFLT)nodes[i].y>ymax)
             ymax=(PLFLT)nodes[i].y;
+       }
     }
 
     xmin=xmin-.05*VRPH_ABS(xmax-xmin);
@@ -426,11 +442,14 @@ bool VRP::plot_route(int r, const char *filename)
 
     // Plot all the other points
     plssym(2,1);
+    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
     for(i=1;i<=this->num_nodes;i++)
     {
+        #pragma omp critical 
+       { 
         x[i-1]=this->nodes[i].x;
         y[i-1]=this->nodes[i].y;
-
+       }
     }
     plpoin(this->num_nodes,x,y,4);
 

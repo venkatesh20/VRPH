@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
 
     int i,n;
     char infile[200];
+    int chunk=CHUNKSIZE;
 
     if(argc < 5 || (strncmp(argv[1],"-help",5)==0 || strcmp(argv[1],"-h")==0 || strcmp(argv[1],"--h")==0))
     {        
@@ -89,6 +90,7 @@ int main(int argc, char *argv[])
     {
         printf("Total route length before clean up: %f\n",V.get_total_route_length()-V.get_total_service_time());
         V.normalize_route_numbers();
+        #pragma omp parallel for shared(chunk) private(i) schedule(dynamic, chunk)
         for(i=1;i<=V.get_total_number_of_routes();i++)
             V.clean_route(i,ONE_POINT_MOVE+TWO_POINT_MOVE+TWO_OPT);
     }

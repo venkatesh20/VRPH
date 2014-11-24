@@ -62,7 +62,10 @@ bool TwoPointMove::search(class VRP *V, int j, int rules)
 
     // Create the search_space
     V->create_search_neighborhood(j, rules);
+    bool cond1,cond2=false;
+    int chunk=CHUNKSIZE;
 
+    #pragma omp parallel for shared(chunk, cond1, cond2) schedule(dynamic, chunk) private(i)
     for(i=0;i<V->search_size;i++)
     {
         k=V->search_space[i];
@@ -74,7 +77,7 @@ bool TwoPointMove::search(class VRP *V, int j, int rules)
             if(evaluate(V,j,k,rules,&M)==true)
             {
                 // Feasible move found
-                if(accept_type==VRPH_FIRST_ACCEPT || (accept_type==VRPH_LI_ACCEPT && M.savings<-VRPH_EPSILON) )
+                if((accept_type==VRPH_FIRST_ACCEPT || (accept_type==VRPH_LI_ACCEPT && M.savings<-VRPH_EPSILON) ) && (cond1||cond2))
                 {
                     // make the move
 
@@ -82,8 +85,10 @@ bool TwoPointMove::search(class VRP *V, int j, int rules)
                         report_error("%s: move error 1\n",__FUNCTION__);
                     else
                     {
-                        if(!(rules & VRPH_TABU))
-                            return true;
+                        if(!(rules & VRPH_TABU)) {
+                            cond1=true;
+                            #pragma omp flush(cond1)
+                          }
                         else
                         {
                             // Check VRPH_TABU status of move - return true if its ok
@@ -91,7 +96,8 @@ bool TwoPointMove::search(class VRP *V, int j, int rules)
                             if(V->check_tabu_status(&M, old_sol))
                             {
                                 delete [] old_sol;
-                                return true; // The move was ok
+                                cond2=true; // The move was ok
+                                #pragma omp flush(cond2)
                             }
 
                         }
@@ -112,6 +118,7 @@ bool TwoPointMove::search(class VRP *V, int j, int rules)
         }
     }
 
+    if (cond1||cond2) return true;
 
 
     if(accept_type==VRPH_FIRST_ACCEPT)

@@ -63,12 +63,25 @@ bool OrOpt::search(class VRP *V, int a, int len, int rules)
 
     // Load the string into the str array to look for the VRPH_DEPOT
     str[0]=a;
+    int chunk=CHUNKSIZE;
+    bool flag=true;
+    #pragma omp parallel for shared(chunk,len,str) private(i) schedule(dynamic,chunk)
     for(i=1;i<len;i++)
     {
+      if (flag) {
+        #pragma omp critical 
+       {
         str[i]= V->next_array[str[i-1]];
         if(str[i]<=VRPH_DEPOT)
-            return false;
+         {
+           flag=false;
+           #pragma omp flush(flag)
+         }
+       }
+      }     
     }
+    
+      if (flag==false) return flag;
 
     V->create_search_neighborhood(a, rules);
 
@@ -80,8 +93,11 @@ bool OrOpt::search(class VRP *V, int a, int len, int rules)
         V->export_solution_buff(old_sol);
     }
         
+    bool cond1,cond2,cond3,cond4=false;    
+    #pragma omp parallel for shared(chunk,cond1,cond2,cond3,cond4) private(i) schedule(dynamic,chunk)
     for(i=0;i<V->search_size;i++)
     {
+    
         c=V->search_space[i];
     
         if(c!=VRPH_DEPOT)                
@@ -95,8 +111,9 @@ bool OrOpt::search(class VRP *V, int a, int len, int rules)
                 flag=1;
 
             // Look for overlap
-            
-            for(int j=0;j<len;j++)
+            int j;
+            #pragma omp parallel for schedule(dynamic, chunk) shared(chunk, str) private(j) 
+            for(j=0;j<len;j++)
             {
                 if(str[j]==c || str[j]==d)
                     // Either c or d is already in the string that starts at a
@@ -109,14 +126,17 @@ bool OrOpt::search(class VRP *V, int a, int len, int rules)
                 if(evaluate(V,a,len,c,d,rules, &M)==true)
                 {
                     // The move is good--make it
-                    if(accept_type == VRPH_FIRST_ACCEPT || (accept_type==VRPH_LI_ACCEPT && M.savings<-VRPH_EPSILON))
+                    if((accept_type == VRPH_FIRST_ACCEPT || (accept_type==VRPH_LI_ACCEPT && M.savings<-VRPH_EPSILON)) && (cond1||cond2))
                     {
                         if(move(V, &M)==false)
                             report_error("%s: move error 1\n",__FUNCTION__);
                         else
                         {
-                            if(!(rules & VRPH_TABU))
-                                return true;
+                            if(!(rules & VRPH_TABU)) {
+                                //return true; // need here
+                                cond1=true;
+                                #pragma omp flush(cond1)
+                                }
                             else
                             {
                                 // Check VRPH_TABU status of move - return true if its ok
@@ -124,7 +144,9 @@ bool OrOpt::search(class VRP *V, int a, int len, int rules)
                                 if(V->check_tabu_status(&M, old_sol))
                                 {
                                     delete [] old_sol;
-                                    return true; // The move was ok
+                                    //return true; // The move was ok need here
+                                     cond2=true;
+                                     #pragma omp flush(cond2)
                                 }
                                 // else we reverted back - continue the search for a move
                             }
@@ -141,14 +163,17 @@ bool OrOpt::search(class VRP *V, int a, int len, int rules)
                     if(accept_type == VRPH_LI_ACCEPT)
                     {
                         // Move if downhill
-                        if(M.savings<-VRPH_EPSILON)
+                        if((M.savings<-VRPH_EPSILON) && (cond3||cond4))
                         {
                             if(move(V, &M)==false)
                                 report_error("%s: move error 2\n",__FUNCTION__);
                             else
                             {
-                                if(!(rules & VRPH_TABU))
-                                    return true;
+                                if(!(rules & VRPH_TABU)) {
+                                      //return true;
+                                       cond3=true;
+                                       #pragma omp flush(cond3)
+                                    }
                                 else
                                 {
                                     // Check VRPH_TABU status of move - return true if its ok
@@ -156,7 +181,9 @@ bool OrOpt::search(class VRP *V, int a, int len, int rules)
                                     if(V->check_tabu_status(&M, old_sol))
                                     {
                                         delete [] old_sol;
-                                        return true; // The move was ok
+                                        //return true; // The move was ok
+                                         cond4=true;
+                                         #pragma omp flush(cond4)
                                     }
                                     // else we reverted back - continue the search for a move
                                 }
@@ -173,6 +200,8 @@ bool OrOpt::search(class VRP *V, int a, int len, int rules)
             }
         }
     }
+    
+    if (cond1||cond2||cond3||cond4) return true;
 
     if(accept_type == VRPH_FIRST_ACCEPT || BestM.savings==VRP_INFINITY)
     {

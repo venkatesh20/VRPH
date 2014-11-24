@@ -41,13 +41,14 @@ void ClarkeWright::CreateSavingsMatrix(class VRP *V, double lambda, bool use_nei
     ///
 
     int i,j,k,m,n;
-
+    int chunk=CHUNKSIZE;
     n = V->num_original_nodes;    // n is the max. # of non-VRPH_DEPOT nodes    
 
 
     if(!use_neighbor_list)
     {
         k=0;
+        #pragma omp parallel for shared(chunk,k) schedule(dynamic, chunk) private(i,j)
         for(i=1;i<=n;i++)
         {
             for(j=i+1;j<=n;j++)
@@ -60,6 +61,7 @@ void ClarkeWright::CreateSavingsMatrix(class VRP *V, double lambda, bool use_nei
                     s[k].savings=V->d[i][VRPH_DEPOT]+V->d[VRPH_DEPOT][j]-lambda*V->d[i][j];
                     s[k].i=i;
                     s[k].j=j;
+                    #pragma omp critical
                     k++;
                 }
             }
@@ -78,28 +80,39 @@ void ClarkeWright::CreateSavingsMatrix(class VRP *V, double lambda, bool use_nei
     {    
         // Use the neighbor_lists
         k=0;
+        bool flag=false;
+        #pragma omp parallel for shared(chunk,k) private(i,m, flag) schedule(dynamic, chunk)
         for(i=1;i<=n;i++)
         {
+            flag=false;
+            
             for(m=0;m<V->neighbor_list_size;m++)
             {
+               if (flag==false) 
+               {
                 j= V->nodes[i].neighbor_list[m].position;
-                if(j==VRPH_DEPOT)
+                if ((j==VRPH_DEPOT) && (flag==false))
                 {
                     m++;
-                    if(m== V->neighbor_list_size)
-                        break;//exit the m loop
+                    if(m== V->neighbor_list_size) {
+                        //break;//exit the m loop
+                        flag=true;
+                        #pragma omp flush(flag)
+                    }
                     else
                         j= V->nodes[i].neighbor_list[m].position;
                 }
-
+    
 
                 if(V->routed[i] && V->routed[j])
                 {
                     s[k].savings = V->d[VRPH_DEPOT][i] + V->d[j][VRPH_DEPOT] - lambda * V->d[i][j];
                     s[k].i=i;
                     s[k].j=j;
+                    #pragma omp critical
                     k++;
                 }
+               } 
             }
 
         }
@@ -151,6 +164,8 @@ bool ClarkeWright::Construct(VRP *V, double lambda, bool use_neighbor_list)
     // If so, then we assume that a solution on a subset of nodes is desired
     // Otherwise, we construct the default routes for ALL possible nodes
     int num_routed=0;
+    int chunk=CHUNKSIZE;
+    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i) reduction(+:num_routed)
     for(i=1;i<=V->num_original_nodes;i++)
     {
         if(V->routed[i])
