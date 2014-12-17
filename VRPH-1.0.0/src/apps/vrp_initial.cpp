@@ -11,6 +11,8 @@
 ////////////////////////////////////////////////////////////
 
 #include "VRPH.h"
+#include "iostream"
+
 
 #define RANDOM 0
 #define REGRET 1
@@ -78,7 +80,6 @@ int main(int argc, char *argv[])
         // Use Clarke Wright with \lambda=1
         printf("Finding initial solution using Clarke-Wright algorithm\n");
         CW.Construct(&V, 1.0, false);
-        
     }
     else
     {

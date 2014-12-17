@@ -11,12 +11,8 @@
 ////////////////////////////////////////////////////////////
 
 #include "VRPH.h"
-#include "omp.h"
+#include <algorithm>
 #define VRPH_MAX_CYCLES 500
-#define OPENMP_BIND_PROC TRUE
-#define OPENMP_DYNAMIC TRUE
-#define OPENMP_NESTED TRUE
-#define CHUNKSIZE 100
 
 void VRPH_version()
 {
@@ -33,7 +29,7 @@ VRP::VRP(int n)
     ///
 
     int i,j;
-    int chunk=CHUNKSIZE;
+
     num_nodes=n;
     num_original_nodes=n;
     total_demand=0;
@@ -60,37 +56,14 @@ VRP::VRP(int n)
     // The distance matrix is allocated when the problem is loaded
     fixed=new bool*[n+2];
     fixed[0]=new bool[(n+2)*(n+2)];
-   
-    
     for(i=1;i<n+2;i++)
         fixed[i]=fixed[i-1]+(n+2);
-
-    
-
-
-#pragma omp parallel shared(chunk) private(i)
-{
-   #pragma omp sections nowait
- {
-    #pragma omp section
     for(i=0;i<n+2;i++)
     {
         routed[i]=false;
         for(j=0;j<n+2;j++)
             fixed[i][j]=false;
     }
-
-   // For keeping track of the statistics
-
-    #pragma omp section
-    for(i=0;i<NUM_HEURISTICS;i++)
-    {
-        num_evaluations[i]=0;
-        num_moves[i]=0;
-
-    }
-  }
-}
 
     // Set these to default values--they may change once
     // we read the file.
@@ -108,6 +81,14 @@ VRP::VRP(int n)
     record = 0.0;
     deviation = VRPH_DEFAULT_DEVIATION;        
 
+    // For keeping track of the statistics
+
+    for(i=0;i<NUM_HEURISTICS;i++)
+    {
+        num_evaluations[i]=0;
+        num_moves[i]=0;
+
+    }
 
     total_service_time = 0.0;
 
@@ -157,13 +138,9 @@ VRP::VRP(int n, int ndays)
     fixed[0]=new bool[(n+2)*(n+2)];
     for(i=1;i<n+2;i++)
         fixed[i]=fixed[i-1]+(n+2);
-  int chunk=CHUNKSIZE;
 
-#pragma omp parallel shared(chunk) private(i)
-{
-   #pragma omp sections nowait
- {
-    #pragma omp section
+   int chunk=CHUNKSIZE;
+   #pragma omp parallel for shared(chunk) private(i,j) schedule(dynamic, chunk) 
     for(i=0;i<n+2;i++)
     {
         routed[i]=false;
@@ -171,17 +148,6 @@ VRP::VRP(int n, int ndays)
             fixed[i][j]=false;
     }
 
-   // For keeping track of the statistics
-
-    #pragma omp section
-    for(i=0;i<NUM_HEURISTICS;i++)
-    {
-        num_evaluations[i]=0;
-        num_moves[i]=0;
-
-    }
-  }
-}
     // Set these to default values--they may change once
     // we read the file.
 
@@ -199,6 +165,14 @@ VRP::VRP(int n, int ndays)
     record = 0.0;
     deviation = VRPH_DEFAULT_DEVIATION;        
 
+    // For keeping track of the statistics 
+    for(i=0;i<NUM_HEURISTICS;i++)
+    {
+        num_evaluations[i]=0;
+        num_moves[i]=0;
+
+    }
+
     total_service_time = 0.0;
 
     // Create the solution warehouse
@@ -208,15 +182,12 @@ VRP::VRP(int n, int ndays)
     this->route_wh=NULL;
 
     // Now allocate d days worth of storage at each of the nodes
-  #pragma omp parallel shared(ndays, chunk) private(i)
-{
-    #pragma omp for schedule(dynamic,chunk)
     for(i=0;i<=n+1;i++)
     {
         this->nodes[i].daily_demands=new int[ndays+1];
         this->nodes[i].daily_service_times=new double[ndays+1];
     }
-}
+
     // Set this to true only if we have valid coordinates 
     // This is valid only for plotting the solution
     can_display=false;
@@ -421,10 +392,7 @@ void VRP::create_distance_matrix(int type)
 
     // Otherwise construct the matrix - we store the whole thing even though
     // it is symmetric as we found that this was quite a bit faster...
-   int chunk=CHUNKSIZE;
-  #pragma omp parallel shared(chunk)
-{
-    #pragma omp for schedule(dynamic,chunk) collapse(2)
+
     for(i=0;i<=n+1;i++)
     {
         for(j=0;j<=n+1;j++)
@@ -432,7 +400,7 @@ void VRP::create_distance_matrix(int type)
                 this->nodes[j].y) + this->nodes[j].service_time ;
 
     }
-}
+
 
     return;
 
@@ -444,6 +412,7 @@ void VRP::create_neighbor_lists(int nsize)
     /// Creates the neighbor list of size nsize for each node
     /// including the VRPH_DEPOT. 
     ///
+
 
     if(nsize>num_nodes )
     {
@@ -478,92 +447,56 @@ void VRP::create_neighbor_lists(int nsize)
     max=0.0;
     // NEW
     maxpos=0;
+    
     int chunk=CHUNKSIZE;
-   #pragma omp parallel shared(max, maxpos,NList,chunk) private(i)
-{
-    #pragma omp for schedule(dynamic,chunk)
-    for(i=1;i<=nsize;i++)
+    #pragma omp parallel for shared(chunk,NList, max, maxpos) schedule(dynamic, chunk) private(i)
+    for(i=0;i<n;i++)
     {
-        
-        NList[i-1].val=d[VRPH_DEPOT][i];
+       if (i< nsize-1) {
+        NList[i].val=d[VRPH_DEPOT][i+1];
 
-        NList[i-1].position = i;
-        
-       
+        NList[i].position = i;
+
         // keep track of the largest value
-     
-        if(NList[i-1].val > max)
+        if(NList[i].val > max)
         {
-            max=NList[i-1].val;
-            maxpos=i-1;
+           #pragma omp critical 
+           {
+            max=NList[i].val;
+            maxpos=i;
+           }
         }
-
-    }    
-}
-
-    // Now go through the rest of the nodes.
- #pragma omp parallel shared(max, maxpos,NList,chunk) private(i,b)
-{
-   #pragma omp for schedule(dynamic,chunk)
-    for(i=nsize+1;i<=n;i++)
-    {
-        if(d[VRPH_DEPOT][i]<max)
+     } else {
+         if(d[VRPH_DEPOT][i]<max)
         {
+            #pragma omp critical
+           {
             // Replace element in position maxpos
             NList[maxpos].val=d[VRPH_DEPOT][i];
             //nodes[i].depot_distance;
             NList[maxpos].position=i;
-        }
-        // Now find the new max
-        max=0.0;
-        for(b=0;b<nsize;b++)
-        {
-            if(NList[b].val>max)
-            {
-                maxpos=b;
-                max=NList[b].val;
             }
         }
-    }
-}
+     }
+    }    
+
     qsort(NList,nsize,sizeof(VRPNeighborElement), VRPNeighborCompare);
     i=0;
-  
-   omp_lock_t lck1;
-   omp_init_lock(&lck1);
-
- #pragma omp parallel for shared(chunk) private(b) schedule(dynamic,chunk)
+    #pragma omp parallel for shared(chunk,NList, max, maxpos) schedule(dynamic, chunk) private(i)
     for(b=0;b<nsize;b++)
     {
         nodes[VRPH_DEPOT].neighbor_list[b].val=NList[b].val;
         nodes[VRPH_DEPOT].neighbor_list[b].position=NList[b].position;
-
-#        if NEIGHBOR_DEBUG
- omp_set_lock(&lck1);
-        printf("(%d,%d,%f) \n",VRPH_DEPOT,nodes[VRPH_DEPOT].neighbor_list[b].position,
-            nodes[VRPH_DEPOT].neighbor_list[b].val);
- omp_unset_lock(&lck1);
-#endif
-
-
+        NList[b].position=VRP_INFINITY;
+        NList[b].val=VRP_INFINITY;
     }
 
-#    if NEIGHBOR_DEBUG
-omp_set_lock(&lck1);
-    printf("\n\n");
-omp_unset_lock(&lck1);
-#endif
 
 
-    k=0;
-    // Done with NeighborList for VRPH_DEPOT.  Now do it for the rest of the nodes
-   #pragma omp parallel for shared(max, maxpos,NList,chunk) private(i,j) schedule(dynamic, chunk)
-    for(i=1;i<=n;i++)
+ for(i=1;i<=n;i++)
     {
         // Loop through all the nodes and create their Neighbor Lists
         // First initialize the NList
-       
-        #pragma omp parallel for schedule(dynamic,chunk)
         for(j=0;j<nsize;j++)
         {
             NList[j].position=VRP_INFINITY;
@@ -576,14 +509,9 @@ omp_unset_lock(&lck1);
         NList[0].val=d[i][VRPH_DEPOT];
 
 
-        #pragma omp parallel for schedule(dynamic,chunk)
         for(j=1;j<i;j++)
         {
-#if NEIGHBOR_DEBUG
-omp_set_lock(&lck1);
-            printf("Loop 1; i=%d; in j loop(%d)\n",i,j);
-omp_unset_lock(&lck1);
-#endif
+
 
             dd=d[i][j];
 
@@ -621,16 +549,10 @@ omp_unset_lock(&lck1);
             }
 
         }
-      
-       #pragma omp parallel for schedule(dynamic,chunk)
+
+
         for(j=i+1;j<=n;j++)
         {
-#if NEIGHBOR_DEBUG
-omp_set_lock(&lck1);
-            printf("Loop 2; i=%d; in j loop(%d)\n",i,j);
-omp_unset_lock(&lck1);
-#endif
-
             dd=d[i][j];
 
             if(j<=nsize)// was <
@@ -668,42 +590,22 @@ omp_unset_lock(&lck1);
 
         }
 
-
-#if NEIGHBOR_DEBUG
-omp_set_lock(&lck1);
-        printf("Node %d neighbor list before sorting\n",i);
-        
-#pragma omp parallel for schedule(dynamic,chunk)
-        for(b=0;b<nsize;b++)
-        {
-            printf("NList[%d]=%d,%f[%f]\n",b,NList[b].position,NList[b].val,d[i][NList[b].position]);
-        }
-omp_unset_lock(&lck1);
-#endif
         // Now sort the NList and stick the resulting list into
         // the neighbor list for node i
         qsort (NList, nsize, sizeof(VRPNeighborElement), VRPNeighborCompare);
 
-        #pragma omp parallel for schedule(dynamic,chunk)
         for(b=0;b<nsize;b++)
         {
             nodes[i].neighbor_list[b].position=NList[b].position;
             nodes[i].neighbor_list[b].val=NList[b].val;
             if(i== nodes[i].neighbor_list[b].position)
             {
-                omp_set_lock(&lck1);
                 fprintf(stderr,"ERROR:: Node %d is in it's own neighbor list!!\n", i);
                 fprintf(stderr,"i=%d; %d[%d],%f[%f])\n",i,nodes[i].neighbor_list[b].position,
                     NList[b].position,nodes[i].neighbor_list[b].val,NList[b].val);
 
                 report_error("%s: Error creating neighbor lists\n",__FUNCTION__);
-               omp_unset_lock(&lck1);
             }
-#if NEIGHBOR_DEBUG
-omp_set_lock(&lck1);
-            printf("NList[%d]=%d,%f[%f]",b,nodes[i].neighbor_list[b].position,nodes[i].neighbor_list[b].val,d[i][nodes[i].neighbor_list[b].position]);
-omp_unset_lock(&lck1);
-#endif
         }
 
         // Hackk to make the VRPH_DEPOT in everyone's list
@@ -711,12 +613,12 @@ omp_unset_lock(&lck1);
         //nodes[i].neighbor_list[nsize-1].val=d[i][VRPH_DEPOT];
 
     }
-    delete [] NList;
 
-omp_destroy_lock(&lck1);
+    delete [] NList;
 
     return;
 
+   
 }
 
 
@@ -730,7 +632,6 @@ bool VRP::check_feasibility(VRPViolation *VV)
 
     int i;
     bool is_feasible=true; 
-   int chunk=CHUNKSIZE;
     // We will set this to false if we find a violation
 
     VV->capacity_violation=-VRP_INFINITY;
@@ -738,8 +639,7 @@ bool VRP::check_feasibility(VRPViolation *VV)
 
     this->normalize_route_numbers();
 
-  ;
-  #pragma omp parallel for shared(chunk) private(i) schedule(dynamic,chunk)
+    #pragma omp parallel for schedule(runtime) private(i)
     for(i=1;i<=this->total_number_of_routes;i++)
     {
         if(this->route[i].length>this->orig_max_route_length)
@@ -1293,7 +1193,7 @@ bool VRP::create_default_routes()
     // No violations yet...
     violation.capacity_violation = 0;
     violation.length_violation = 0;
-    int chunk=CHUNKSIZE;
+
 
     total_route_length=0;
 
@@ -1303,9 +1203,8 @@ bool VRP::create_default_routes()
     routed[VRPH_DEPOT]=true;
 
     next_array[VRPH_DEPOT] = -1;
-
-    ;
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
+    int chunk=CHUNKSIZE;
+    #pragma omp parallel for schedule(dynamic, chunk) shared(chunk, is_feasible) private(i)
     for(i=1;i<=n;i++)
     {
         next_array[i] = -(i+1);
@@ -1320,8 +1219,10 @@ bool VRP::create_default_routes()
         
         // Check capacities
         if(route[i].load > max_veh_capacity)
+            #pragma omp critical
             is_feasible=false;
         if(route[i].length > max_route_length)
+            #pragma omp critical
             is_feasible=false;
 
         route[i].num_customers=1;
@@ -1343,15 +1244,13 @@ bool VRP::create_default_routes()
 
 
 
-omp_lock_t lck1;
-omp_init_lock(&lck1);
 
     if(is_feasible == false)
     { 
         // We had infeasible routes - record the violation in the Solution and 
         // return false;
 
-        #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
+        #pragma omp parallel for schedule(dynamic, chunk) shared(chunk) private(i)
         for(i=1;i<=n;i++)
         {
             routed[i]=false;    
@@ -1361,10 +1260,10 @@ omp_init_lock(&lck1);
             if(route[i].load > max_veh_capacity)
             {
                 // Update the worst violations
-               omp_set_lock(&lck1);
+
                 printf("Default routes load violation: %d > %d\n",route[i].load,
                     max_veh_capacity);
-                omp_unset_lock(&lck1);
+
                 if( (route[i].load - max_veh_capacity) > 
                     violation.capacity_violation)
                 {
@@ -1376,10 +1275,10 @@ omp_init_lock(&lck1);
             if(route[i].length > max_route_length)
             {
                 // Update the worst violations
-               omp_destroy_lock(&lck1);
+
                 printf("Default routes length violation: %f > %f\n",route[i].length,
                     max_route_length);
-               omp_destroy_lock(&lck1);
+
                 if( (route[i].length -max_route_length ) >
                     violation.length_violation)
                 {
@@ -1393,18 +1292,16 @@ omp_init_lock(&lck1);
 
         }
 
-        omp_destroy_lock(&lck1);
         return false;
     }
     else
     {
         // All routes were feasible
-        #pragma omp parallel for shared(chunk) private(i) schedule(dynamic, chunk)
+         #pragma omp parallel for schedule(dynamic, chunk) shared(chunk) private(i)
         for(i=1;i<=n;i++)
         {
             routed[i]=true;
         }
-        omp_destroy_lock(&lck1);
         return true;
     }
 
@@ -1422,23 +1319,21 @@ bool VRP::create_default_routes(int day)
     ///
 
     int i,n;
-    ;
     bool is_feasible=true;
     // No violations yet...
     violation.capacity_violation = 0;
     violation.length_violation = 0;
     total_route_length=0;
-    int chunk=CHUNKSIZE;
+
     n = this->num_original_nodes;
     this->num_nodes=n;
-    omp_lock_t lck1;
-    omp_init_lock(&lck1);
 
     // First, create the initial routes:  VRPH_DEPOT - node - VRPH_DEPOT for all nodes
 
     routed[VRPH_DEPOT]=true;
     next_array[VRPH_DEPOT] = -1;
-    #pragma omp parallel for shared(chunk) private(i) schedule(dynamic, chunk)
+    int chunk=CHUNKSIZE;
+    #pragma omp parallel for schedule(dynamic, chunk) shared(chunk) private(i)
     for(i=1;i<=n;i++)
     {
 
@@ -1466,12 +1361,7 @@ bool VRP::create_default_routes(int day)
     total_number_of_routes=n;
 
     // Now eject the nodes that don't require service on this day
-    #pragma omp parallel private(i)
-{
-    #pragma omp sections nowait
- {
-    #pragma omp section
- {
+    #pragma omp parallel for schedule(dynamic, chunk) shared(chunk) private(i)
     for(i=1;i<=n;i++)
     {
         if(this->nodes[i].daily_demands[day]==-1)// indicates no service required
@@ -1480,26 +1370,25 @@ bool VRP::create_default_routes(int day)
 
     // Now check for feasibility;
     this->normalize_route_numbers();
- }
 
     // Check capacities
-    #pragma omp section
+     #pragma omp parallel for schedule(dynamic, chunk) shared(chunk) private(i)
     for(i=1;i<=this->total_number_of_routes;i++)
     {
         if(route[i].load > max_veh_capacity)
+            #pragma omp critical
             is_feasible=false;
         if(route[i].length > max_route_length)
+            #pragma omp critical
             is_feasible=false;
     }
-  }
-}
+
     if(is_feasible == false)
     { 
         // We had infeasible routes - record the violation in the Solution and 
         // return false;
 
-
-       #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
+        #pragma omp parallel for schedule(dynamic, chunk) shared(chunk) private(i)
         for(i=1;i<=n;i++)
         {
             routed[i]=false;    
@@ -1509,10 +1398,10 @@ bool VRP::create_default_routes(int day)
             if(route[i].load > max_veh_capacity)
             {
                 // Update the worst violations
-               omp_set_lock(&lck1);
+
                 printf("Default routes load violation: %d > %d\n",route[i].load,
                     max_veh_capacity);
-               omp_unset_lock(&lck1);
+
                 if( (route[i].load - max_veh_capacity) > 
                     violation.capacity_violation)
                 {
@@ -1524,10 +1413,10 @@ bool VRP::create_default_routes(int day)
             if(route[i].length > max_route_length)
             {
                 // Update the worst violations
-                omp_set_lock(&lck1);
+
                 printf("Default routes length violation: %f > %f\n",route[i].length,
                     max_route_length);
-                omp_set_lock(&lck1);
+
                 if( (route[i].length -max_route_length ) >
                     violation.length_violation)
                 {
@@ -1536,13 +1425,11 @@ bool VRP::create_default_routes(int day)
                 }
             }
         }
-        omp_destroy_lock(&lck1);
         return false;
     }
-    else{
-        omp_destroy_lock(&lck1);
+    else
         return true;
-    }
+    
 }
 
 
@@ -1583,12 +1470,10 @@ bool VRP::perturb()
     ///
 
     int i, n, pre, post;
-    ;
     int current,next;
     n= num_nodes;
     VRPNeighborElement *v;
     VRPMove M;
-    int chunk=CHUNKSIZE;
 
     Postsert Postsert;
     Presert  Presert;
@@ -1624,7 +1509,8 @@ bool VRP::perturb()
     int a,b,c,j,k,node1=0, node2=0,b_route,b_load,k_demand, jj, ll;
     double  best_savings,b_len,jk,kl,jl;
 
-    #pragma omp parallel for shared(a,b,c,k,node1,node2,b_route,b_load,k_demand,jj,ll,chunk,best_savings,b_len,jk,kl,jl) schedule(dynamic, chunk) private(j)       
+    int chunk=CHUNKSIZE;
+    #pragma omp parallel for schedule(dynamic, chunk) shared(chunk,a,b,c,k,node1,node2,b_route,b_load,k_demand,jj,ll,best_savings,b_len,jk,kl,jl,m) private(j)
     for(j=0;j<m;j++)
     {
         best_savings=VRP_INFINITY;
@@ -1835,7 +1721,7 @@ bool VRP::eject_route(int r, int *route_buff)
     /// Places an ordered list of the ejected nodes in route_buff[].
     ///
 
-    int current,cnt,i;
+    int current,cnt;
 
     // First copy the route into the buffer
     current=this->route[r].start;
@@ -1852,6 +1738,7 @@ bool VRP::eject_route(int r, int *route_buff)
     
 
     // Now eject the nodes
+   int i;
    #pragma omp parallel for schedule(runtime) private(i)
     for(i=0;i<cnt;i++)
         this->eject_node(route_buff[i]);
@@ -1965,21 +1852,13 @@ bool VRP::is_feasible(VRPMove *M, int rules)
     /// is currently not used.
     ///
 
-   int i;
-   bool flag=true;
-   int chunk=CHUNKSIZE;
-   #pragma omp parallel for schedule(runtime) private(i)
-    for(i=0;i<M->num_affected_routes;i++)
+    for(int i=0;i<M->num_affected_routes;i++)
     {
-        if (flag) {
-        if( (M->route_lens[i]>this->max_route_length) || (M->route_loads[i]>this->max_veh_capacity) ) {
-            flag=false;
-            #pragma omp flush (flag)
-         }
-      }
+        if( (M->route_lens[i]>this->max_route_length) || (M->route_loads[i]>this->max_veh_capacity) )
+            return false;
     }
     
-    return flag;
+    return true;
 
 }
 bool VRP::inject_node(int j)
@@ -2155,7 +2034,7 @@ void VRP::find_cheapest_insertion(int j, int *edge, double *costs, int rules)
     k=-1;
 
     // Set the increase to be a singleton route since this must be feasible
-    int chunk=CHUNKSIZE;
+
     min_feasible_increase = this->d[VRPH_DEPOT][j] + this->d[j][VRPH_DEPOT];
     min_increase = this->d[VRPH_DEPOT][j] + this->d[j][VRPH_DEPOT];
     edge[0]=edge[1]=edge[2]=edge[3]=VRPH_DEPOT;
@@ -2314,10 +2193,8 @@ void VRP::find_cheapest_insertion(int j, int *edge, double *costs, int rules)
     {
         // Only search the neighbor list for positions
         // We already computed the VRPH_DEPOT-j-VRPH_DEPOT position.
-       ;
-      #pragma omp parallel for shared(chunk,h,i,k,best_route, new_route, next_node, ij,ik,jk,min_feasible_increase, increase, min_increase) private(m) schedule(dynamic, chunk)
         for(m=0;m<neighbor_list_size;m++)
-        {
+        { 
             i=nodes[j].neighbor_list[m].position;
             if(routed[i])
             {
@@ -2399,30 +2276,27 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
         report_error("%s: invalid rules\n",__FUNCTION__);
 
     int i,j,k;
-    ;
     double best_obj=VRP_INFINITY;
     int *best_sol, *orderings,*best_ordering, *start_sol;
     int best_index=0;
-    int chunk=CHUNKSIZE;
-    omp_lock_t lck1;
-    omp_init_lock(&lck1);
-
 
     best_sol=orderings=best_ordering=start_sol=NULL;
 
-
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
+    int chunk=CHUNKSIZE;
+    omp_lock_t lck1;
+    omp_init_lock(&lck1);
+    #pragma omp parallel for schedule(dynamic, chunk) private(i)
     for(i=0;i<num;i++)
     {
         if(nodelist[i]==VRPH_DEPOT)
         {
-             omp_set_lock(&lck1);
+            omp_set_lock(&lck1);
             fprintf(stderr,"nodelist[%d] of %d=VRPH_DEPOT\n",i,num);
             report_error("%s: Cannot inject VRPH_DEPOT!\n",__FUNCTION__);
-             omp_unset_lock(&lck1);
+            omp_unset_lock(&lck1);
         }
     }
-
+    omp_destroy_lock(&lck1);
     best_sol=new int[3+(this->num_nodes)+num];//!!! The eventual sol_buff is larger !!!!
     start_sol=new int[3+(this->num_nodes)+num];
     this->export_solution_buff(start_sol);
@@ -2435,29 +2309,23 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
         best_ordering=new int[num];
         int edge[4];
         double costs[2];
-        #pragma omp parallel for shared(orderings,chunk) schedule(dynamic, chunk) private(i)
         for(i=0;i<num;i++)
             orderings[i]=i;
         
-        #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
+        #pragma omp parallel for schedule(dynamic, chunk) private(i,j,k)
         for(i=0;i<attempts;i++)
         {
             // Create a random permutation
             random_permutation(orderings,num);
-            #pragma omp parallel for shared(orderings,chunk) schedule(dynamic, chunk) private(j)
             for(j=0;j<num;j++)
             {
                 if(nodelist[orderings[j]]==VRPH_DEPOT)
                 {
-       
-                    omp_set_lock(&lck1);
                     fprintf(stderr,"inject_set: Bizarre nodelist[%d]:\n",j);
                     for(k=0;k<num;k++)
                         fprintf(stderr,"(%d,%d) ",orderings[k],nodelist[orderings[k]]);
 
                     report_error("%s: Found VRPH_DEPOT in nodelist!\n",__FUNCTION__);
-                    omp_unset_lock(&lck1);
-
                 }
                 this->inject_node(nodelist[orderings[j]]);
             }
@@ -2473,12 +2341,10 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
             }
 
             // Now return to the original solution...
-            #pragma omp parallel for shared(orderings,chunk) schedule(dynamic, chunk) private(j)
             for(j=0;j<num;j++)
                 this->eject_node(nodelist[orderings[j]]);
         }
         // Now revisit the best ordering found and try to improve it!
-        #pragma omp parallel for shared(best_ordering,chunk) schedule(dynamic, chunk) private(j)
         for(j=0;j<num;j++)
         {
             this->find_cheapest_insertion(nodelist[best_ordering[j]],edge,costs,VRPH_USE_NEIGHBOR_LIST);
@@ -2496,14 +2362,10 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
         current_list=new int[num];
         int edge[4];
         double costs[2];
-         bool flag=true;
-        #pragma omp parallel for shared(orderings,chunk) schedule(dynamic, chunk) private(i)
         for(i=0;i<num;i++)
             orderings[i]=i;
         
-        
-         #pragma omp parallel for shared(orderings,chunk) schedule(dynamic, chunk) private(i)
-        for(i=0;i<attempts;i++)
+         for(i=0;i<attempts;i++)
         {
             // Create a random permutation
             random_permutation(orderings,num);
@@ -2513,17 +2375,12 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
             // It is unfortunately possible to enter some cycles here - this is a cheap
             // way of getting out
             int cycle_ctr=0;
-             #pragma omp parallel for shared(best_sol,orderings,best_ordering,start_sol,chunk) schedule(dynamic, chunk) private(j) reduction(+:cycle_ctr)
             for(j=0;j<num;j++)
             {
                 cycle_ctr++;
                 if(cycle_ctr==VRPH_MAX_CYCLES)
                 {
-                    omp_set_lock(&lck1);
                     fprintf(stderr,"Cycle encountered in REGRET SEARCH!\nReverting to original solution\n");
-                    omp_unset_lock(&lck1);
-                    #pragma omp flush (flag)
-                    if (flag) {
                     if(best_obj<VRP_INFINITY)
                     {
                         this->import_solution_buff(best_sol);
@@ -2532,17 +2389,10 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
                         delete [] best_ordering;
                         delete [] start_sol;
                         delete [] current_list;
-                        //return 0;
-                        flag=false;
-                        #pragma omp flush (flag)
+                        return 0;
                     }
                     else
-                        {
-                         omp_set_lock(&lck1);
-                         report_error("%s: Couldn't escape cycle in REGRET search!\n",__FUNCTION__);
-                         omp_unset_lock(&lck1);
-                        }
-                    }
+                        report_error("%s: Couldn't escape cycle in REGRET search!\n",__FUNCTION__);
                 }
                 
                 // Find the cheapest way to insert the present node
@@ -2551,7 +2401,6 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
                 double max_ejection_cost=-VRP_INFINITY;
                 double current_cost;
                 int node_to_eject=-1;
-                #pragma omp parallel for schedule(runtime) private(k) shared(j)
                 for(k=0;k<j;k++)
                 {
                     // Make sure the node we are testing isn't involved in the cheapest insertion
@@ -2563,10 +2412,8 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
                             node_to_eject=current_list[k];
                             if(!routed[node_to_eject])
                             {
-                                omp_set_lock(&lck1);
                                 fprintf(stderr,"%d NOT ROUTED!!\n",node_to_eject);
                                 report_error("%s: Error in inject_set\n",__FUNCTION__);
-                                omp_unset_lock(&lck1);
                             }
                         }
                     }
@@ -2600,15 +2447,7 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
             this->import_solution_buff(start_sol);
         }
         delete [] current_list;
-
-      if (!flag) {
-        omp_destroy_lock(&lck1);
-        return 0;
-      }
     }
-
-    omp_destroy_lock(&lck1);
-
 
     this->import_solution_buff(best_sol);
 
@@ -2617,8 +2456,8 @@ int VRP::inject_set(int num, int *nodelist, int rules, int attempts)
     delete [] best_ordering;
     delete [] start_sol;
 
-    
-     return best_index;
+
+    return best_index;
 }
 
 void VRP::eject_neighborhood(int j, int num, int *nodelist)
@@ -2632,9 +2471,6 @@ void VRP::eject_neighborhood(int j, int num, int *nodelist)
 
     int i,k,cnt;
     int *ejected;
-    omp_lock_t lck1;
-    omp_init_lock(&lck1);
-
 
     ejected=new int[this->num_nodes+1];
     memset(ejected,0,(this->num_nodes+1)*sizeof(int));
@@ -2669,8 +2505,11 @@ void VRP::eject_neighborhood(int j, int num, int *nodelist)
             
     }
 
+    int chunk=CHUNKSIZE;
     // We now have cnt nodes to eject in nodelist
-    #pragma omp parallel for schedule(runtime) private(i)
+    omp_lock_t lck1;
+    omp_init_lock(&lck1);
+    #pragma omp parallel for schedule(dynamic, chunk) private(i)
     for(i=0;i<cnt;i++)
     {
         if(nodelist[i]==VRPH_DEPOT)
@@ -2683,13 +2522,12 @@ void VRP::eject_neighborhood(int j, int num, int *nodelist)
 
         this->eject_node(nodelist[i]);
     }
-
+    omp_destroy_lock(&lck1);
 #if 0
     this->verify_routes("After ejecting neighborhood\n");
 #endif
     delete [] ejected;
 
-    omp_destroy_lock(&lck1);
     return;
 }
 
@@ -2709,15 +2547,13 @@ void VRP::normalize_route_numbers()
     int *indices;
     R= count_num_routes();
     n= this->num_original_nodes;
-    int chunk = CHUNKSIZE;
+
 
     // First check to see if we are already normalized
 
     // Make the arrays 1-based to avoid insanity...
     indices=new int[n+1];
 
-     ;
-     #pragma omp parallel for shared(indices, chunk) schedule(dynamic, chunk) private(i)
     for(i=0;i<=n;i++)
         indices[i]=1;
 
@@ -2811,17 +2647,16 @@ bool VRP::create_search_neighborhood(int j, int rules)
     ///
 
     int i,k, cnt;
-    int chunk=CHUNKSIZE;
     // Define the search space
     
-
+    int chunk=CHUNKSIZE;
     if( rules & VRPH_USE_NEIGHBOR_LIST )
     {
 
         // Search only those nodes that are in the neighbor list
         search_size=0;
         cnt=0;
-        #pragma omp parallel for shared(k, chunk) schedule(dynamic, chunk) private(i) reduction(+:cnt)
+        #pragma omp parallel for schedule(dynamic,chunk) shared(chunk,k) private(i) reduction(+:cnt)
         for(i=0;i<neighbor_list_size;i++)
         {
             // Consider node k
@@ -2875,8 +2710,7 @@ bool VRP::create_search_neighborhood(int j, int rules)
         // Search_space is just the route itself
         search_space[0]=VRPH_DEPOT;
         search_space[1]=this->route[route_num[j]].start;
-        
-        #pragma omp parallel for shared(j, chunk) schedule(dynamic, chunk) private(i)
+        #pragma omp parallel for schedule(dynamic, chunk) private(i)
         for(i=2;i<=this->route[route_num[j]].num_customers;i++)
             search_space[i]=this->next_array[search_space[i-1]];
 
@@ -3297,8 +3131,8 @@ void VRP::update(VRPMove *M)
         return;    
 
     int i;
-
-    #pragma omp parallel for schedule(runtime) private(i) 
+    int chunk=CHUNKSIZE;
+    #pragma omp parallel for schedule(dynamic, chunk) private(i)
     for(i=0; i < M->num_affected_routes; i++)
     {
         // Update length
@@ -3359,8 +3193,8 @@ void VRP::find_neighboring_routes()
 
     // Compute the route centers
     normalize_route_numbers();
-    int chunk = CHUNKSIZE;
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i) 
+    int chunk=CHUNKSIZE;
+    #pragma omp parallel for schedule(dynamic, chunk) private(i) shared(chunk)
     for(i=1;i<=total_number_of_routes;i++)
     {
         compute_route_center(i);
@@ -3369,25 +3203,16 @@ void VRP::find_neighboring_routes()
     // Create the matrix
     rd = new VRPNeighborElement *[total_number_of_routes + 1];
     rd[0]= new VRPNeighborElement[(total_number_of_routes +1) * (total_number_of_routes + 1)];
-    
-     #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i) 
-    for(i=1;i<total_number_of_routes+1;i++) {
-       #pragma omp atomic
+    for(i=1;i<total_number_of_routes+1;i++)
         rd[i]=rd[i-1] + (total_number_of_routes+1);
-    }
-
-
-   #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i) 
-    for(i=1;i<=this->total_number_of_routes;i++) {
-      rd[i][0].position=VRP_INFINITY;
-      rd[i][0].val=VRP_INFINITY;
-   }
 
     // Fill the matrix with inter-route distances
-    #pragma omp parallel for schedule(dynamic,chunk) collapse(2)
+    #pragma omp parallel for schedule(dynamic, chunk) private(i,j) shared(chunk)
     for(i=1;i<=this->total_number_of_routes;i++)
     {
-       for(j=1;j<=this->total_number_of_routes;j++)
+        rd[i][0].position=VRP_INFINITY;
+        rd[i][0].val=VRP_INFINITY;
+        for(j=1;j<=this->total_number_of_routes;j++)
         {
             rd[i][j].position = j;
             rd[i][j].val = VRPDistance(VRPH_EUC_2D,route[i].x_center, route[i].y_center,
@@ -3397,12 +3222,12 @@ void VRP::find_neighboring_routes()
 
     // Now sort each row in put the top MAX_NEIGHBORING_ROUTES in the route structs.
 
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i) 
+    #pragma omp parallel for schedule(dynamic, chunk) private(i) shared(chunk)
     for(i=1;i<=total_number_of_routes;i++)
         qsort(rd[i],total_number_of_routes+1,sizeof(VRPNeighborElement),VRPNeighborCompare);
     
     
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i,j) 
+    #pragma omp parallel for schedule(dynamic, chunk) private(i,j) shared(chunk)
     for(i=1;i<=total_number_of_routes;i++)
     {
         for(j=0;j<MAX_NEIGHBORING_ROUTES;j++)
@@ -3488,9 +3313,9 @@ void VRP::update_route(int j, VRPRoute *R)
     ///
 
     int i, current;
+    int chunk=CHUNKSIZE;
     double st=0;// for the service time
 
-    int chunk=CHUNKSIZE;
     R->x[0]=this->nodes[VRPH_DEPOT].x;
     R->y[0]=this->nodes[VRPH_DEPOT].y;
     R->start=route[j].start;
@@ -3510,8 +3335,7 @@ void VRP::update_route(int j, VRPRoute *R)
         R->y[1]=this->nodes[current].y;
         st+=this->nodes[current].service_time;
 
-         
-        #pragma omp parallel for shared(chunk,current) schedule(dynamic, chunk) private(i) reduction(+:st)
+        #pragma omp parallel for schedule(dynamic, chunk) private(i) shared(chunk,current) reduction(+:st)
         for(i=1; i<R->num_customers; i++)
         {
             current=this->next_array[current];
@@ -3532,9 +3356,9 @@ void VRP::update_route(int j, VRPRoute *R)
     R->x[1]=this->nodes[current].x;
     R->y[1]=this->nodes[current].y;
     st+=this->nodes[current].service_time;
-
-      #pragma omp parallel for shared(chunk,current) schedule(dynamic, chunk) private(i) reduction(+:st)
-        for(i=1; i<R->num_customers; i++)
+ 
+    #pragma omp parallel for schedule(dynamic, chunk) private(i) shared(chunk,current) reduction(+:st)
+    for(i=1; i<R->num_customers; i++)
     {
         current=this->pred_array[current];
         st+=this->nodes[current].service_time;
@@ -3568,17 +3392,14 @@ double VRP::split(double p)
     int i,j,k;
     double beta;
     struct double_int *thetas;
-    int chunk=CHUNKSIZE;
+
     thetas=new double_int[this->num_nodes];
 
-    #pragma omp parallel for shared(chunk,thetas) schedule(dynamic, chunk) private(i)
-    for(i=1;i<=this->num_nodes;i++)
+    #pragma omp parallel for schedule(runtime) private(i)
+    for(i=0;i<this->num_nodes;i++)
     {
-        #pragma omp critical 
-        {
-         thetas[i-1].k=i;
-         thetas[i-1].d=this->nodes[i].theta;
-       }
+        thetas[i].k=i+1;
+        thetas[i].d=this->nodes[i+1].theta;
     }
 
     // Sort the list of thetas
@@ -3594,7 +3415,7 @@ double VRP::split(double p)
 
         // Now find out how many nodes we get in each half
         k=0;
-        #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(j) reduction(+:k)
+       #pragma omp parallel for schedule(runtime) private(j) reduction(+:k)
         for(j=0;j<this->num_nodes;j++)
         {
             // Count the nodes above the line
@@ -3607,7 +3428,7 @@ double VRP::split(double p)
     }
 
     // Eject them - note that we assume to have begun with a full solution...
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
+    #pragma omp parallel for schedule(runtime) private(i)
     for(i=1;i<=this->num_original_nodes;i++)
     {
         if(routed[i])
@@ -3640,20 +3461,16 @@ int VRP::split_routes(double p, int **ejected_routes, double *t)
         report_error("%s: p must be less than .5\n");
 
     int i,j,k;
-    int chunk=CHUNKSIZE;
     double beta;
     struct double_int *thetas;
 
     thetas=new double_int[this->num_nodes];
 
-    #pragma omp parallel for shared(chunk,thetas) schedule(dynamic, chunk) private(i)
-    for(i=1;i<=this->num_nodes;i++)
+    #pragma omp parallel for schedule(runtime) private(i)
+    for(i=0;i<this->num_nodes;i++)
     {
-       #pragma omp critical
-       {
-        thetas[i-1].k=i;
-        thetas[i-1].d=this->nodes[i].theta;
-       }
+        thetas[i].k=i+1;
+        thetas[i].d=this->nodes[i+1].theta;
     }
 
     // Sort the list of thetas
@@ -3669,7 +3486,7 @@ int VRP::split_routes(double p, int **ejected_routes, double *t)
 
         // Now find out how many nodes we get in each half
         k=0;
-        #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(j) reduction(+:k)
+        #pragma omp parallel for schedule(runtime) private(j) reduction(+:k)
         for(j=0;j<this->num_nodes;j++)
         {
             // Count the nodes above the line
@@ -3686,7 +3503,7 @@ int VRP::split_routes(double p, int **ejected_routes, double *t)
     // Eject the routes that do not have any nodes in the larger portion
 
     int num_ejected=0;
-    #pragma omp parallel for shared(chunk,beta) schedule(dynamic, chunk) private(i) reduction(+:num_ejected)
+    #pragma omp parallel for schedule(runtime) private(i) reduction(+:num_ejected)
     for(i=1;i<=this->total_number_of_routes;i++)
     {
         int start=this->route[i].start;
@@ -3786,8 +3603,7 @@ void VRP::unfix_all()
     /// Unfixes any and all edges that may be currently fixed.
     ///
 
-    int chunk=CHUNKSIZE;
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) collapse(2)
+   #pragma omp parallel for schedule(runtime) collapse(2)
     for(int i=0;i<=matrix_size;i++)
         for(int j=0;j<=matrix_size;j++)
             fixed[i][j]=false;
@@ -3802,9 +3618,9 @@ void VRP::fix_string(int *node_string, int k)
     /// is the number of nodes in the string.
     ///
 
-    int i;
-    int chunk=CHUNKSIZE;
-    #pragma omp parallel for shared(chunk,k) schedule(dynamic, chunk) private(i)
+   int i;
+   int chunk=CHUNKSIZE;
+   #pragma omp parallel for schedule(dynamic, chunk) private(i) shared(chunk)
     for(i=0;i<k-1;i++)
         this->fix_edge(node_string[i], node_string[i+1]);
 
@@ -3834,9 +3650,6 @@ int VRP::read_fixed_edges(const char *filename)
     int i, a, b, k;
     FILE *in;
 
-    omp_lock_t lck1;
-    omp_init_lock(&lck1);
-
     if( (in=fopen(filename,"r"))==NULL)
     {
         fprintf(stderr,"Error opening %s for reading\n",filename);
@@ -3845,10 +3658,14 @@ int VRP::read_fixed_edges(const char *filename)
 
     fscanf(in,"%d\n",&k);
 
-    #pragma omp parallel for shared(in,a,b,k) schedule(runtime) private(i)
+    int chunk=CHUNKSIZE;
+    omp_lock_t lck1;
+    omp_init_lock(&lck1);
+      
+   #pragma omp parallel for schedule(dynamic, chunk) private(i) shared(chunk)
     for(i=0;i<k;i++)
     {
-        omp_set_lock(&lck1);
+       omp_set_lock(&lck1);
         fscanf(in,"%d %d\n",&a, &b);
         if(a<0 || b<0 || a>this->num_original_nodes || b>this->num_original_nodes)
         {
@@ -3856,10 +3673,9 @@ int VRP::read_fixed_edges(const char *filename)
             report_error("%s: Error in read_fixed_edges\n",__FUNCTION__);
         }
         this->fix_edge(a,b);
-        omp_unset_lock(&lck1);
+       omp_unset_lock(&lck1);
     }
-
-   omp_destroy_lock(&lck1);
+    omp_destroy_lock(&lck1);
 
     // Return the number of fixed edges read in
     return k;
@@ -3923,11 +3739,11 @@ void VRP::perturb_locations(double c)
 
     int i, pre, post;
     double v,theta;
-    int chunk=CHUNKSIZE;
+
     // First export the solution buffer
     this->export_solution_buff(this->current_sol_buff);
 
-    #pragma omp parallel for shared(chunk,pre,post,theta) private(i,v) schedule(dynamic, chunk)
+   #pragma omp parallel for schedule(runtime) private(i)
     for(i=1;i<=this->num_nodes;i++)
     {
         pre= VRPH_MAX(VRPH_DEPOT,this->pred_array[i]);
@@ -4021,9 +3837,8 @@ void VRP::append_route(int *sol_buff, int *route_buff)
     sol_buff[0]+=j;
 
     sol_buff[current_num+1]=-route_buff[0];
-    #pragma omp parallel for schedule(runtime) shared(current_num,j) private(i)
+    #pragma omp parallel for schedule(runtime) private(i)
     for(i=1;i<j;i++)
-        #pragma omp critical
         sol_buff[current_num+1+i]=route_buff[i];
     
 
@@ -4069,14 +3884,8 @@ int VRP::intersect_solutions(int *new_sol, int **route_list, int *sol1, int *sol
     this->import_solution_buff(sol1);
     num_routes=this->total_number_of_routes;
     k=0;
-    bool flag=false;
-    #pragma omp parallel for schedule(runtime) shared(j, rnums) private(i,m) reduction(+:k) reduction(-:num_routes)
     for(i=0;i<j;i++)
     {
-        flag=(num_routes==min_routes);
-        
-        #pragma omp flush(flag)
-        if (!flag) {
         // Copy route i from sol1 into the route_list[] array
         route_list[i][0]=this->route[rnums[i]].start;
 
@@ -4092,11 +3901,8 @@ int VRP::intersect_solutions(int *new_sol, int **route_list, int *sol1, int *sol
 
         k++;
         num_routes--;
-        } else {
-         #pragma omp flush(flag)
-       }
-        //if(num_routes==min_routes)
-          //  break;
+        if(num_routes==min_routes)
+            break;
     }
 
     // We actually copied k of the j routes in the intersection
@@ -4106,7 +3912,6 @@ int VRP::intersect_solutions(int *new_sol, int **route_list, int *sol1, int *sol
     int *junk;
     junk=new int[this->num_original_nodes];
     // won't use this
-    #pragma omp parallel for schedule(runtime) shared(k,rnums) private(i)
     for(i=0;i<k;i++)
         this->eject_route(rnums[i], junk);
 
@@ -4281,13 +4086,7 @@ bool VRP::check_fixed_edges(const char *message)
 
 
     int i,j;
-    omp_lock_t lck1;
-    omp_init_lock(&lck1);
-    bool flagi=false;
-    bool flagj=false;
 
-    int chunk=CHUNKSIZE;
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) collapse(2)
     for(i=0;i<=this->num_original_nodes;i++)
     {
         for(j=0;j<=this->num_original_nodes;j++)
@@ -4297,35 +4096,27 @@ bool VRP::check_fixed_edges(const char *message)
                 // Make sure i-j or j-i exists
                 if(i!=VRPH_DEPOT)
                 {
-                    flagi=(VRPH_MAX(this->next_array[i],VRPH_DEPOT)!=j && VRPH_MAX(this->pred_array[i],VRPH_DEPOT)!=j);
-                    #pragma omp flush(flagi)
-                    if(flagi)
+                    if(VRPH_MAX(this->next_array[i],VRPH_DEPOT)!=j && VRPH_MAX(this->pred_array[i],VRPH_DEPOT)!=j)
                     {
-                        
-                        omp_set_lock(&lck1);
                         fprintf(stderr,"Fixed edge %d-%d not in solution!!",i,j);
                         fprintf(stderr,"%d-%d-%d\n",VRPH_MAX(this->pred_array[i],VRPH_DEPOT),i,
                             VRPH_MAX(this->next_array[i],VRPH_DEPOT));
                         fprintf(stderr,message);
-                       
+
                         if(this->fixed[j][i])
                             fprintf(stderr,"%d-%d also fixed\n",j,i);
                         else
                             fprintf(stderr,"%d-%d NOT fixed!\n",j,i);
-                        omp_unset_lock(&lck1);
-                  }
 
-
+                        return false;
+                    }
                 }
 
                 // Make sure i-j or j-i exists
                 if(j!=VRPH_DEPOT)
                 {
-                    flagj=(VRPH_MAX(this->next_array[j],VRPH_DEPOT)!=i && VRPH_MAX(this->pred_array[j],VRPH_DEPOT)!=i);
-                    #pragma omp flush(flagj)
-                    if(flagj)
+                    if(VRPH_MAX(this->next_array[j],VRPH_DEPOT)!=i && VRPH_MAX(this->pred_array[j],VRPH_DEPOT)!=i)
                     {
-                        omp_set_lock(&lck1);
                         fprintf(stderr,"Fixed edge %d-%d not in solution!!",i,j);
                         fprintf(stderr,"%d-%d-%d\n",VRPH_MAX(this->pred_array[j],VRPH_DEPOT),j,
                             VRPH_MAX(this->next_array[j],VRPH_DEPOT));
@@ -4334,7 +4125,8 @@ bool VRP::check_fixed_edges(const char *message)
                             fprintf(stderr,"%d-%d also fixed\n",j,i);
                         else
                             fprintf(stderr,"%d-%d NOT fixed!\n",j,i);
-                        omp_unset_lock(&lck1);
+                        return false;
+
                     }
                 }
             }
@@ -4343,7 +4135,6 @@ bool VRP::check_fixed_edges(const char *message)
 
     }
 
-    omp_destroy_lock(&lck1);
     return true;
 }
 int VRP::find_common_routes(int *sol1, int *sol2, int *route_nums)
@@ -4361,11 +4152,11 @@ int VRP::find_common_routes(int *sol1, int *sol2, int *route_nums)
 
     // First, import sol1
     this->import_solution_buff(sol1);
-    int chunk=CHUNKSIZE;
+    
     r1=this->total_number_of_routes;
     h11=new int[r1+1]; h12=new int[r1+1];// 1-based arrays
     L1=new double[r1+1];
-    #pragma omp parallel for shared(chunk,r1,h11,h12,L1) schedule(dynamic, chunk) private(i)
+    #pragma omp parallel for schedule(runtime) private(i)
     for(i=1;i<=r1;i++)
     {
         // Import route i into rte
@@ -4382,7 +4173,7 @@ int VRP::find_common_routes(int *sol1, int *sol2, int *route_nums)
     r2=this->total_number_of_routes;
     h21=new int[r2+1]; h22=new int[r2+1];// 1-based arrays
     L2=new double[r2+1];
-    #pragma omp parallel for shared(chunk,r2,h21,h22,L2) schedule(dynamic, chunk) private(i)
+    #pragma omp parallel for schedule(runtime) private(i)
     for(i=1;i<=r2;i++)
     {
         this->update_route(i,&rte);
@@ -4395,7 +4186,7 @@ int VRP::find_common_routes(int *sol1, int *sol2, int *route_nums)
 
     // Now compare the hash values
     cnt=0;
-    #pragma omp parallel for shared(chunk,r1,r2,h11,h12,h21, h22, L1, L2) collapse(2) reduction(+:cnt)
+    #pragma omp parallel for schedule(runtime) private(i,j) reduction(+:cnt)
     for(i=1;i<=r1;i++)
     {
         for(j=1;j<=r2;j++)
@@ -4424,11 +4215,10 @@ void VRP::set_daily_demands(int day)
     /// integer.  If a day of 0 is given, then we set the demand to the mean value.
     ///
 
-    int i, j, k;
-    int chunk=CHUNKSIZE;
+    int i,j,k=0;
+
     if(day>0)
     {
-        #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
         for(i=0;i<=this->num_original_nodes;i++)
         {
             if(this->nodes[i].daily_demands[day]>=0)
@@ -4441,12 +4231,10 @@ void VRP::set_daily_demands(int day)
     else
     {
         // Day is 0 - use the mean demand
-        
-        #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i,j,k) 
+        #pragma omp parallel for schedule(runtime) private(i,j) reduction(+:k)
         for(i=0;i<=this->num_original_nodes;i++)
         {
             int mean_demand=0;
-            k=0;
             for(j=1;j<=this->num_days;j++)
             {
                 if(this->nodes[i].daily_demands[j]>=0)
@@ -4473,9 +4261,8 @@ void VRP::set_daily_service_times(int day)
     ///
 
     int i;
-    int chunk=CHUNKSIZE;
-    
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
+
+    #pragma omp parallel for schedule(runtime) private(i)
     for(i=0;i<=this->num_original_nodes;i++)
     {
         this->nodes[i].service_time=this->nodes[i].daily_service_times[day];
@@ -4493,19 +4280,18 @@ void VRP::update_arrival_times()
     /// Computes the arrival time at all customers.
     ///
 
-    int routenum, next, current,i;
+    int routenum, next, current;
     double t;
-    int chunk=CHUNKSIZE;
+
     // Set the arrival times to -1 so that the only ones with positive 
     // arrival_time values are those that are actually visited
-   
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
+
+   int i;
+   #pragma omp parallel for schedule(runtime) private(i)
     for(i=1;i<=this->num_original_nodes;i++)
         this->nodes[i].arrival_time=-1;
 
-
-    
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i,routenum, next, current)
+    #pragma omp parallel for schedule(runtime) private(i)
     for(i=1;i<=this->num_original_nodes;i++)
     {
 
@@ -4552,20 +4338,14 @@ bool VRP::check_tabu_status(VRPMove *M, int *old_sol)
 
 
     int i,j;
-    int chunk=CHUNKSIZE;
-    bool flag=false;
+
     // We will always accept a move that reduces the # of routes
     if(M->num_affected_routes>1)
     {
-       
-        #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
         for(i=0;i<M->num_affected_routes;i++)
         {
-            flag=(M->route_custs[i]==0);
-            #pragma omp flush(flag)
-            if (!flag) continue;
-            //if(M->route_custs[i]==0)
-            //    return true;
+            if(M->route_custs[i]==0)
+                return true;
         }
     }    
     
@@ -4576,7 +4356,7 @@ bool VRP::check_tabu_status(VRPMove *M, int *old_sol)
     printf("Checking tabu status of %d routes\n",M->num_affected_routes);
 #endif
 
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i,j) reduction(+:num_tabu_routes)
+    #pragma omp parallel for schedule(runtime) private(i,j) reduction(+:num_tabu_routes)
     for(i=0;i<M->num_affected_routes;i++)
     {
         this->update_route(M->route_nums[i],&r);
@@ -4608,7 +4388,7 @@ bool VRP::check_tabu_status(VRPMove *M, int *old_sol)
 #endif
 
     // The move is not tabu - update the tabu list 
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(i)
+   #pragma omp parallel for schedule(runtime) private(i)
     for(i=0;i<M->num_affected_routes;i++)
     {    
         this->update_route(M->route_nums[i],&r);
@@ -4655,11 +4435,9 @@ void VRP::reset()
     /// Liquidates the solution memory and sets all nodes to unrouted.
     ///
 
-    int j;
-    int chunk=CHUNKSIZE;
     this->solution_wh->liquidate();
-    
-    #pragma omp parallel for shared(chunk) schedule(dynamic, chunk) private(j)
+   int j;
+   #pragma omp parallel for schedule(runtime) private(j)
     for(j=1;j<=this->num_original_nodes;j++)
         this->routed[j]=false;
 }

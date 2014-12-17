@@ -13,13 +13,6 @@
 #ifndef _VRP_H
 #define _VRP_H
 
-#include "omp.h"
-
-#define OPENMP_BIND_PROC TRUE
-#define OPENMP_DYNAMIC TRUE
-#define OPENMP_NESTED TRUE
-#define CHUNKSIZE 100
-
 // VRP class
 class VRP
 {

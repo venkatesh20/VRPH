@@ -1,6 +1,6 @@
 # Set compiler and flags
 CC=g++
-CFLAGS= -O3 -Wall -fopenmp
+CFLAGS= -O3 -Wall -fopenmp -std=c++0x -static
 
 # Set directory for static library and binaries 
 # Defaults to ./lib and ./bin
@@ -139,15 +139,15 @@ test:
 	-rm -rf $(TEST_OUTPUT)
 	@echo "*************************************"
 	@echo Testing vrp_rtr on test_instance.vrp
-	./bin/vrp_rtr -f ./test_instance.vrp -v >> $(TEST_OUTPUT).tmp
+	#./bin/vrp_rtr -f ./test_instance.vrp -v >> $(TEST_OUTPUT).tmp
 	@echo "*************************************"
 	@echo Testing vrp_sa on test_instance.vrp
-	./bin/vrp_sa -f ./test_instance.vrp -v >> $(TEST_OUTPUT).tmp
+	#./bin/vrp_sa -f ./test_instance.vrp -v >> $(TEST_OUTPUT).tmp
 	@echo "*************************************"
 	@echo Testing vrp_init on test_instance.vrp
-	./bin/vrp_init -f ./test_instance.vrp -m 1 >> $(TEST_OUTPUT).tmp
 	@echo "*************************************"
-	#@echo Testing vrp_ej on test_instance.vrp
+	./list.sh	
+	@echo Testing vrp_ej on test_instance.vrp
 	#./bin/vrp_ej -f ./test_instance.vrp -j 15 -t 500 -m 0 -v >> $(TEST_OUTPUT).tmp
 ifeq ($(HAS_OSI_GLPK),1)
 	@echo "*************************************"

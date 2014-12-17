@@ -36,14 +36,18 @@ VRPSolutionWarehouse::VRPSolutionWarehouse(int max_sols, int n)
     this->max_size=max_sols;
     this->sols=new VRPSolution[this->max_size];
     // This calls the default constructor so we have to allocate the memory for
-    // the sol buffer still... 
-    for(int i=0;i<this->max_size;i++)
+    // the sol buffer still...
+    int i;
+    int chunk=CHUNKSIZE;
+    #pragma omp parallel for schedule(runtime) private(i)
+    for(i=0;i<this->max_size;i++)
         this->sols[i].sol=new int[n+2];
 
     this->hash_table=new struct htable_entry[HASH_TABLE_SIZE];
 
     // Zeroize the hash table
-    for(int i=0;i<HASH_TABLE_SIZE;i++)
+    #pragma omp parallel for schedule(runtime) private(i)
+    for(i=0;i<HASH_TABLE_SIZE;i++)
         hash_table[i].num_vals=0;
 
     this->worst_obj=VRP_INFINITY;
@@ -147,6 +151,7 @@ int VRPSolutionWarehouse::add_sol(VRPSolution *new_sol, int start_index)
 #endif
 
     // Make room in position i
+    #pragma omp parallel for schedule(runtime) private(j)
     for(j=VRPH_MIN(num_sols,max_size-1); j>i; j--)
     {
         this->sols[j].obj=this->sols[j-1].obj;
@@ -192,17 +197,23 @@ void VRPSolutionWarehouse::show()
     /// Debugging function to show the current solutions in the warehouse.
     ///
 
+    omp_lock_t lck1;
+    omp_init_lock(&lck1);
+    int i;
     printf("Solution Warehouse contents\n%d sols, worst is %f\n",num_sols,worst_obj);
-    for(int i=0;i<this->num_sols;i++)
+    #pragma omp parallel for schedule(runtime) private(i)
+    for(i=0;i<this->num_sols;i++)
     {
+        omp_set_lock(&lck1);
         printf("%03d\t%5.3f\t",i,this->sols[i].obj);
         if(this->sols[i].in_IP==true)
             printf("true\n");
         else
             printf("false\n");
+        omp_unset_lock(&lck1);
     }
 
-
+   omp_destroy_lock(&lck1);
     return;
 
 
@@ -214,8 +225,9 @@ bool VRPSolutionWarehouse::liquidate()
     /// Removes all solutions from the warehouse.
     ///
 
-    int i;
+    int i,j;
 
+    #pragma omp parallel for schedule(runtime) private(i)
     for(i=0;i<this->num_sols;i++)
         // Erase the existing solutions
         memset(this->sols[i].sol,0,this->sols[i].n*sizeof(int));
@@ -224,9 +236,11 @@ bool VRPSolutionWarehouse::liquidate()
     this->worst_obj=VRP_INFINITY;
 
     // Zeroize the hash table
+
+    #pragma omp parallel for schedule(runtime) private(i,j)
     for(i=0;i<HASH_TABLE_SIZE;i++)
     {
-        for(int j=0;j<this->hash_table[i].num_vals;j++)
+        for(j=0;j<this->hash_table[i].num_vals;j++)
         {
             this->hash_table[i].hash_val_2[j]=0;
             this->hash_table[i].length[j]=0;
@@ -264,6 +278,7 @@ int VRPSolution::hash(int salt)
     int val = 0;
     int i;
     
+    #pragma omp parallel for schedule(runtime) private(i) reduction(^:val)
     for(i=0;i<this->n-1; i++)//was -2??
         val ^= (randvals[(salt + VRPH_ABS(this->sol[i])+VRPH_ABS(this->sol[VRPH_MIN((this->n)-1,i+1)]) )% NUM_RANDVALS]);
 

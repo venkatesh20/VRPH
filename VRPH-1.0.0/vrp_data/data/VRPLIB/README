@@ -1,0 +1,27 @@
+This is a set of files taken from the former branchandcut.org site.
+VRPH is able to handle all of these file formats.  However, note that
+VRPH's objective is to always find the minimum total route length.
+Thus, for the problems that require a particular number of routes,
+VRPH is not aware of this constraint and may find a better solution.
+These directories contain .vrp files, .opt files (optimal solutions),
+as well as .sol files which I created by converting the .opt files
+into the format understood by VRPH.
+
+I believe that VRPH is able to quite easily find
+a solution to G/G-n262-k25.vrp that is both feasible (25 feasible routes)
+and also with lower total route length than what is listed in the file.
+In particular, the following solution has total route length 5557.00:
+
+261 -2 170 230 26 148 114 125 64 -6 85 105 227 109 20 29 97 132 -14 212 247 149 
+86 94 151 88 50 77 91 250 -27 83 206 65 228 53 130 129 221 61 90 211 133 5 204 -33 
+234 142 68 231 202 139 1 229 71 31 205 79 261 -43 39 102 15 52 243 16 3 118 -44 
+22 120 128 45 107 98 240 117 253 257 165 -54 18 30 191 12 49 124 255 137 173
+260 -58 183 150 220 36 217 195 -69 177 237 62 249 157 224 163 -73 198 207 112 8
+190 -74 7 28 182 34 95 256 188 87 154 76 155 232 70 99 252 -82 225 241 11 214 13
+1 57 203 -92 178 210 41 110 60 158 51 67 176 -96 138 209 108 244 145 115 4 81 17
+2 -116 199 200 179 161 187 93 46 216 63 180 208 126 -122 78 201 245 147 159 134
+32 226 136 233 -123 37 236 23 48 143 174 196 111 222 -135 84 169 181 171 59 162
+75 219 146 -152 144 192 184 218 119 239 35 259 156 -166 185 19 72 21 100 186 -19
+3 101 13 167 89 248 121 106 189 153 9 251 -213 140 164 160 246 25 141 104 215 -2
+23 38 175 258 24 127 40 17 55 47 168 254 -235 238 10 42 197 194 80 113 103 66 56
+ 242 0

@@ -132,6 +132,8 @@ int VRPSolutionCompare(const void *a, const void *b);
 int VRPCheckTSPLIBString(char *s);
 int VRPGetDimension(char *filename);
 int VRPGetNumDays(char *filename);
+void qs(VRPNeighborElement *v,  VRPNeighborElement first, VRPNeighborElement last);
+
 
 
 #endif

@@ -1,0 +1,20 @@
+This directory contains a set of standard benchmark problems.
+All problems are in a modified TSPLIB format that has become
+the de facto standard for VRP instances.  The Christofides,
+Golden, Li, and Taillard directory contain well-known instances
+from the literature on heuristic methods for the VRP.
+
+The VRPLIB directory contains instances that use integer-valued
+distances that have been used more by those developing methods
+for exact, optimal solutions to the VRP. Each .vrp file has
+a corresponding .opt file that gives the optimal solution.
+The VRPH/data/misc directory contains additional examples 
+of some other types of problems supported by VRPH.
+
+I added a BEST_KNOWN field to nearly all of these problems that
+gives the best solution that I am aware of.  For the small
+problems, it is often a proven optimal solution.  VRPH processes
+the BEST_KNOWN field in these files and stores it in 
+double VRP.best_known.
+
+cgroer@gmail.com

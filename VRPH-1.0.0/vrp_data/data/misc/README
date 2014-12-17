@@ -1,0 +1,22 @@
+This directory contains a number of examples of properly formatted input files.
+
+explicit_full.vrp
+Single day VRP with an explicit symmetric full distance matrix
+
+explicit_upper_row.vrp
+Single day VRP with an explicit symmetric upper row distance matrix
+
+service_time.vrp
+Single day VRP with service times added at the individual nodes
+
+multi_day.vrp
+50-node multi-day VRP formatted in TSPLIB format.  
+The NODE_COORD_SECTION gives the locations and the distances are Euclidean.
+
+The DEMAND_SECTION indicates the days that a customer requires service.
+A -1 indicates that the customer requires no service on that day.  
+If a customer is visited, then we use the demand given for that
+customer in the original Christofides instance.
+
+The SERVICE_TIME_SECTION gives the service time at each node on each day. I only added service times to a few nodes as an example.  
+The vrp_rtr executable can handle this file and generates a solution for day 1.

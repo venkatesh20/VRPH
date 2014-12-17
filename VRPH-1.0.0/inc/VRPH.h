@@ -16,6 +16,8 @@
 
 #ifndef _VRPH_H
 #define _VRPH_H
+#include "omp.h"
+#define CHUNKSIZE 100
 
 // Supported TSPLIB Problem types
 #define VRPH_TSP                1
